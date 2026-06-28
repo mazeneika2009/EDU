@@ -8,6 +8,8 @@ import { pool, readDB, writeDB, initializeDB } from './server/db.js';
 import nodemailer from 'nodemailer';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import dns from 'dns';
+dns.setDefaultResultOrder('ipv4first');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, '.env') });
@@ -295,6 +297,36 @@ async function startServer() {
     console.warn('[DB] Running without PostgreSQL — using empty in-memory store');
   }
 
+  try {
+    const [existing] = await pool.query('SELECT COUNT(*) AS cnt FROM gardens');
+    if (!existing || existing.length === 0 || Number(existing[0].cnt) === 0) {
+      console.log('[Seed] No gardens found, auto-seeding...');
+      const gardenSeed = [
+        { id: 'g_b5n8d2c1f', titleEn: 'Programming HTML with Real Videos', titleAr: 'برمجة HTML فيديوهات واقعية', titleTr: 'Gerçek Videolarla HTML Programlama', descriptionEn: 'Learn HTML programming from scratch with hands-on video tutorials.', descriptionAr: 'تعلم برمجة HTML من الصفر فيديوهات تعليمية عملية.', descriptionTr: 'Sıfırdan HTML programlamayı uygulamalı video eğitimleriyle öğrenin.', category: 'Programming', priceEGP: 600, priceTRY: 180, rating: '4.7', image: '' },
+        { id: 'g_h4r7t9w1q', titleEn: 'Marketing with Real Videos', titleAr: 'التسويق فيديوهات واقعية', titleTr: 'Gerçek Videolarla Pazarlama', descriptionEn: 'Master digital marketing strategies through real-world video case studies.', descriptionAr: 'إتقان استراتيجيات التسويق الرقمي من خلال دراسات حالة فيديو واقعية.', descriptionTr: 'Gerçek dünya video vaka çalışmalarıyla dijital pazarlama stratejilerinde ustalaşın.', category: 'Marketing', priceEGP: 550, priceTRY: 165, rating: '4.6', image: '' },
+        { id: 'g_k7m3x9p2r', titleEn: 'English with Real Videos', titleAr: 'الإنجليزية فيديوهات واقعية', titleTr: 'Gerçek Videolarla İngilizce', descriptionEn: 'A practical English course using real-world video content.', descriptionAr: 'دورة إنجليزية عملية باستخدام محتوى فيديو واقعي.', descriptionTr: 'Gerçek dünya video içeriği kullanan pratik bir İngilizce kursu.', category: 'Languages', priceEGP: 500, priceTRY: 150, rating: '4.5', image: '' },
+      ];
+      const testUserSeed = [
+        { id: 'u_test_' + genId(), email: 'test@kg.edu', phone: '000', name: 'Test Student', passwordHash: 'test123', isVerified: 1, verificationCode: '', country: 'Egypt', paidGardens: JSON.stringify(['g_b5n8d2c1f', 'g_h4r7t9w1q', 'g_k7m3x9p2r']) },
+        { id: 'u_admin_' + genId(), email: 'admin@kg.edu', phone: 'admin', name: 'Admin', passwordHash: 'admin123', isVerified: 1, verificationCode: '', country: 'Egypt', paidGardens: JSON.stringify([]) },
+      ];
+      for (const g of gardenSeed) {
+        await pool.query('INSERT INTO gardens (id, titleEn, titleAr, titleTr, descriptionEn, descriptionAr, descriptionTr, category, priceEGP, priceTRY, rating, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) ON CONFLICT (id) DO NOTHING',
+          [g.id, g.titleEn, g.titleAr, g.titleTr, g.descriptionEn, g.descriptionAr, g.descriptionTr, g.category, g.priceEGP, g.priceTRY, g.rating, g.image]);
+      }
+      for (const u of testUserSeed) {
+        await pool.query('INSERT INTO users (id, email, phone, name, passwordHash, isVerified, verificationCode, country, paidGardens) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) ON CONFLICT (id) DO NOTHING',
+          [u.id, u.email, u.phone, u.name, u.passwordHash, u.isVerified, u.verificationCode, u.country, u.paidGardens]);
+      }
+      console.log('[Seed] Auto-seed complete: 3 gardens, 2 test users');
+      await initializeDB();
+    } else {
+      console.log('[Seed] Gardens already exist, skipping seed.');
+    }
+  } catch (seedErr) {
+    console.warn('[Seed] Auto-seed skipped:', seedErr.message);
+  }
+
   // --- API ROUTES ---
 
   // Register
@@ -367,28 +399,15 @@ async function startServer() {
         console.error('[AUTH DB ERR] Failed to create welcome email:', dbErr);
       }
 
-      let smtpSent = false;
-      let smtpMethodUsed = 'None (Sandbox Code Only)';
-      try {
-        const mailSubject = "Verify Your Knowledge Garden Account";
-        const mailBody = `Welcome to the Knowledge Garden educational workspace!\n\nTo complete registration and verify your student node credentials, please copy and apply your 6-digit synchronization passcode (OTP):\n\n: ${otpCode}\n\nEnjoy your learning and growth journey!`;
-        
-        const mailRes = await sendOTPEmail(email, otpCode, mailSubject, mailBody);
-        if (mailRes.success) {
-          smtpSent = true;
-          smtpMethodUsed = `NodeMailer (Direct SMTP dispatch successful with message ID: ${mailRes.messageId})`;
-        } else {
-          smtpMethodUsed = `Fallback Sandbox (Credentials unconfigured: ${mailRes.reason})`;
-        }
-      } catch (mailErr) {
-        console.error('[AUTH SMTP ERR] registration safe SMTP trigger failed:', mailErr);
-        smtpMethodUsed = `Fallback Sandbox (Exception occurred: ${mailErr.message || mailErr})`;
-      }
+      sendOTPEmail(email, otpCode, "Verify Your Knowledge Garden Account", `Welcome to the Knowledge Garden educational workspace!\n\nTo complete registration and verify your student node credentials, please copy and apply your 6-digit synchronization passcode (OTP):\n\n: ${otpCode}\n\nEnjoy your learning and growth journey!`)
+        .then(r => console.log('[AUTH] SMTP result:', r.success ? 'sent' : r.reason))
+        .catch(e => console.error('[AUTH] SMTP error:', e));
 
       return res.json({
         success: true,
         userId,
         email,
+        otpCode,
         message: 'Registration successful! Please verify your account to continue.'
       });
     } catch (err) {
@@ -415,14 +434,35 @@ async function startServer() {
         otpCode, false, user.id
       ]);
 
-      const mailSubject = "Reset Your Knowledge Garden Password";
-      const mailBody = `A security reset synchronization key has been requested.\n\nYour 6-digit reset code (OTP) is:\n\n: ${otpCode}\n\nPlease enter this code to verify your identity.`;
-      
-      await sendOTPEmail(email, otpCode, mailSubject, mailBody);
+      try {
+        const db = readDB();
+        db.emails.push({
+          id: 'em-reset-' + genId(),
+          userId: user.id,
+          toEmail: email,
+          subject: 'Reset Your Knowledge Garden Password',
+          bodyEn: `A security reset has been requested.\n\nYour 6-digit reset code (OTP) is: ${otpCode}\n\nEnter this code to verify your identity and reset your password.`,
+          bodyAr: `تم طلب إعادة تعيين الأمان.\n\nرمز إعادة التعيين المكون من 6 أرقام (OTP) هو: ${otpCode}\n\nأدخل هذا الرمز للتحقق من هويتك وإعادة تعيين كلمة المرور الخاصة بك.`,
+          bodyTr: `Bir güvenlik sıfırlaması istendi.\n\n6 haneli sıfırlama kodunuz (OTP): ${otpCode}\n\nKimliğinizi doğrulamak ve şifrenizi sıfırlamak için bu kodu girin.`,
+          otpCode: otpCode,
+          isRead: false,
+          timestamp: new Date().toISOString(),
+          isGrowthReport: false,
+          isWelcome: false
+        });
+        writeDB(db);
+      } catch (dbErr) {
+        console.error('[AUTH DB ERR] Failed to create reset email:', dbErr);
+      }
+
+      sendOTPEmail(email, otpCode, "Reset Your Knowledge Garden Password", `A security reset synchronization key has been requested.\n\nYour 6-digit reset code (OTP) is:\n\n: ${otpCode}\n\nPlease enter this code to verify your identity.`)
+        .then(r => console.log('[AUTH] Reset SMTP:', r.success ? 'sent' : r.reason))
+        .catch(e => console.error('[AUTH] Reset SMTP error:', e));
 
       return res.json({
         success: true,
         userId: user.id,
+        otpCode,
         message: 'Reset key dispatched to your email.'
       });
     } catch (err) {
@@ -446,11 +486,32 @@ async function startServer() {
 
       await pool.query('UPDATE users SET verificationCode = ? WHERE id = ?', [code, userId]);
 
-      const mailSubject = "Re-issued Synchronization Code";
-      const mailBody = `Your new 6-digit synchronization passcode (OTP) is:\n\n: ${code}`;
-      await sendOTPEmail(user.email, code, mailSubject, mailBody);
+      try {
+        const db = readDB();
+        db.emails.push({
+          id: 'em-resend-' + genId(),
+          userId: userId,
+          toEmail: user.email,
+          subject: 'Re-issued Synchronization Code',
+          bodyEn: `Your new 6-digit synchronization passcode (OTP) is: ${code}`,
+          bodyAr: `رمز التحقق الجديد المكون من 6 أرقام (OTP) هو: ${code}`,
+          bodyTr: `Yeni 6 haneli senkronizasyon kodunuz (OTP): ${code}`,
+          otpCode: code,
+          isRead: false,
+          timestamp: new Date().toISOString(),
+          isGrowthReport: false,
+          isWelcome: false
+        });
+        writeDB(db);
+      } catch (dbErr) {
+        console.error('[AUTH DB ERR] Failed to create resend email:', dbErr);
+      }
 
-      return res.json({ success: true, message: 'New code dispatched.' });
+      sendOTPEmail(user.email, code, "Re-issued Synchronization Code", `Your new 6-digit synchronization passcode (OTP) is:\n\n: ${code}`)
+        .then(r => console.log('[AUTH] Resend SMTP:', r.success ? 'sent' : r.reason))
+        .catch(e => console.error('[AUTH] Resend SMTP error:', e));
+
+      return res.json({ success: true, message: 'New code dispatched.', otpCode: code });
     } catch (err) {
       return res.status(500).json({ error: 'Resend system failure.' });
     }
@@ -557,14 +618,36 @@ async function startServer() {
            await pool.query('UPDATE users SET verificationCode = ? WHERE id = ?', [code, user.id]);
         }
 
-        const mailSubject = "Synchronization Code: Knowledge Garden Access";
-        const mailBody = `To access your gardener node, please apply your 6-digit synchronization passcode (OTP):\n\n: ${code}`;
-        await sendOTPEmail(user.email, code, mailSubject, mailBody);
+        try {
+          const dbe = readDB();
+          dbe.emails.push({
+            id: 'em-verify-' + genId(),
+            userId: user.id,
+            toEmail: user.email,
+            subject: 'Synchronization Code: Knowledge Garden Access',
+            bodyEn: `To access your gardener node, apply your 6-digit synchronization passcode (OTP): ${code}`,
+            bodyAr: `للوصول إلى عقدة البستاني الخاصة بك، استخدم رمز التحقق المكون من 6 أرقام (OTP): ${code}`,
+            bodyTr: `Bahçıvan düğümünüze erişmek için 6 haneli senkronizasyon kodunuzu (OTP) kullanın: ${code}`,
+            otpCode: code,
+            isRead: false,
+            timestamp: new Date().toISOString(),
+            isGrowthReport: false,
+            isWelcome: false
+          });
+          writeDB(dbe);
+        } catch (dbErr) {
+          console.error('[AUTH DB ERR] Failed to create verify email:', dbErr);
+        }
+
+        sendOTPEmail(user.email, code, "Synchronization Code: Knowledge Garden Access", `To access your gardener node, please apply your 6-digit synchronization passcode (OTP):\n\n: ${code}`)
+          .then(r => console.log('[AUTH] Login-verify SMTP:', r.success ? 'sent' : r.reason))
+          .catch(e => console.error('[AUTH] Login-verify SMTP error:', e));
 
         return res.json({
           success: false,
           requiresVerification: true,
           userId: user.id,
+          otpCode: code,
           message: 'Account not verified. Verification code has been sent.'
         });
       }

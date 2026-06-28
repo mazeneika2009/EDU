@@ -1,1051 +1,1298 @@
 {
   "users": [
     {
-      "id": "u_ao6mdrvom",
-      "email": "mazeneika2000@gmail.com",
-      "phone": "0000",
-      "name": "gggg",
-      "passwordhash": "M",
-      "isverified": 0,
-      "verificationcode": "283847",
-      "createdat": "2026-06-28T05:22:39.000Z",
-      "current_session_id": null,
-      "paidgardens": [],
-      "country": ""
-    },
-    {
       "id": "u_0xosos8w3",
       "email": "mazeneika2009@gmail.com",
       "phone": "000",
       "name": "طالب",
-      "passwordhash": "M",
-      "isverified": 0,
-      "verificationcode": "291847",
-      "createdat": "2026-06-22T00:34:32.000Z",
       "current_session_id": "session_s7jktcmmj",
-      "paidgardens": [
+      "country": "Egypt",
+      "createdAt": "2026-06-22T00:34:32.000Z",
+      "passwordHash": "M",
+      "isVerified": 0,
+      "verificationCode": "291847",
+      "paidGardens": [
         "g_h4r7t9w1q",
         "g_k7m3x9p2r",
         "g_b5n8d2c1f"
-      ],
-      "country": "Egypt"
+      ]
+    },
+    {
+      "id": "u_pffcedu53",
+      "email": "explore-test-123@example.com",
+      "phone": "+201234567890",
+      "name": "Explore Test User",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:45:10.000Z",
+      "passwordHash": "Password123!",
+      "isVerified": 0,
+      "verificationCode": "638394",
+      "paidGardens": []
+    },
+    {
+      "id": "u_io7x0idk9",
+      "email": "student-test-123@example.com",
+      "phone": "+201234567890",
+      "name": "explore-test-123",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:45:10.000Z",
+      "passwordHash": "testpassword123",
+      "isVerified": 0,
+      "verificationCode": "636023",
+      "paidGardens": []
+    },
+    {
+      "id": "u_1ppdm6vzh",
+      "email": "explore-test-123@knowledge.io",
+      "phone": "+1234567890",
+      "name": "Explore Test",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:45:28.000Z",
+      "passwordHash": "TestPassword123!",
+      "isVerified": 0,
+      "verificationCode": "411282",
+      "paidGardens": []
+    },
+    {
+      "id": "u_11oj2ioxk",
+      "email": "student-test-999@example.com",
+      "phone": "+201234567890",
+      "name": "explore-test-123",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:46:19.000Z",
+      "passwordHash": "testpassword123",
+      "isVerified": 0,
+      "verificationCode": "720376",
+      "paidGardens": []
+    },
+    {
+      "id": "u_436mzdwut",
+      "email": "explorer.test.user@gmail.com",
+      "phone": "+1234567890",
+      "name": "Explore Test",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:46:54.000Z",
+      "passwordHash": "TestPassword123!",
+      "isVerified": 0,
+      "verificationCode": "782088",
+      "paidGardens": []
+    },
+    {
+      "id": "u_m6zdgm5r5",
+      "email": "explorer@test.com",
+      "phone": "+1234567890",
+      "name": "explorer-test-123",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:45:52.000Z",
+      "passwordHash": "Password123!",
+      "isVerified": 0,
+      "verificationCode": "190053",
+      "paidGardens": []
+    },
+    {
+      "id": "u_bmd0wqob0",
+      "email": "student-explorer-2026-06-28@garden.io",
+      "phone": "+15550109999",
+      "name": "Explore Test Student",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:48:32.000Z",
+      "passwordHash": "TestPass123!",
+      "isVerified": 0,
+      "verificationCode": "708080",
+      "paidGardens": []
+    },
+    {
+      "id": "u_qbylbbejq",
+      "email": "verify-me-2026@test.com",
+      "phone": "01234567891",
+      "name": "Test User 2026",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:48:38.000Z",
+      "passwordHash": "Password123!",
+      "isVerified": 0,
+      "verificationCode": "255178",
+      "paidGardens": []
+    },
+    {
+      "id": "u_lgotck6uq",
+      "email": "bot.tester.99@example.com",
+      "phone": "+12345678901",
+      "name": "Bot Tester",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:48:56.000Z",
+      "passwordHash": "TestPassword123!",
+      "isVerified": 0,
+      "verificationCode": "652970",
+      "paidGardens": []
+    },
+    {
+      "id": "u_76g2x66cy",
+      "email": "test+kg20260628@example.com",
+      "phone": "+201234567890",
+      "name": "Test User",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:54:29.000Z",
+      "passwordHash": "Password123!",
+      "isVerified": 0,
+      "verificationCode": "782451",
+      "paidGardens": []
+    },
+    {
+      "id": "u_z32dngmxo",
+      "email": "test+kg20260628b@example.com",
+      "phone": "+201234567890",
+      "name": "Test User",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:55:37.000Z",
+      "passwordHash": "Password123!",
+      "isVerified": 0,
+      "verificationCode": "319381",
+      "paidGardens": []
+    },
+    {
+      "id": "u_bel4c4ada",
+      "email": "autotest+20260628@example.com",
+      "phone": "+201234567890",
+      "name": "Auto Tester",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:55:39.000Z",
+      "passwordHash": "StrongPass!123",
+      "isVerified": 0,
+      "verificationCode": "438289",
+      "paidGardens": []
+    },
+    {
+      "id": "u_kkrpstzwg",
+      "email": "test+kg20260628c@example.com",
+      "phone": "+201234567890",
+      "name": "Test User",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:56:37.000Z",
+      "passwordHash": "Password123!",
+      "isVerified": 0,
+      "verificationCode": "121254",
+      "paidGardens": []
+    },
+    {
+      "id": "u_bcdyaxv5b",
+      "email": "test+kg20260628d@example.com",
+      "phone": "+201234567890",
+      "name": "Test User",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:57:12.000Z",
+      "passwordHash": "Password123!",
+      "isVerified": 0,
+      "verificationCode": "507455",
+      "paidGardens": []
+    },
+    {
+      "id": "u_mr8ktmuu9",
+      "email": "teststudent+001@example.com",
+      "phone": "+201234567890",
+      "name": "Test Student",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:57:38.000Z",
+      "passwordHash": "password123",
+      "isVerified": 0,
+      "verificationCode": "186171",
+      "paidGardens": []
+    },
+    {
+      "id": "u_i104xsvi3",
+      "email": "example@gmail.com",
+      "phone": "+201234567890",
+      "name": "Test Student",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:55:52.000Z",
+      "passwordHash": "password123",
+      "isVerified": 0,
+      "verificationCode": "952610",
+      "paidGardens": []
+    },
+    {
+      "id": "u_mte46wzc3",
+      "email": "qa_student_1@example.com",
+      "phone": "+201234567890",
+      "name": "QA Student One",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:55:32.000Z",
+      "passwordHash": "TestPass!234",
+      "isVerified": 0,
+      "verificationCode": "801910",
+      "paidGardens": []
+    },
+    {
+      "id": "u_xzleizfxh",
+      "email": "autotest+20260628b@example.com",
+      "phone": "+201234567890",
+      "name": "Auto Tester",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:59:47.000Z",
+      "passwordHash": "StrongPass!123",
+      "isVerified": 0,
+      "verificationCode": "316867",
+      "paidGardens": []
+    },
+    {
+      "id": "u_v1qs0xr4t",
+      "email": "student+20260628@example.com",
+      "phone": "+201234567890",
+      "name": "Test Student",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:55:49.000Z",
+      "passwordHash": "Password123!",
+      "isVerified": 0,
+      "verificationCode": "411162",
+      "paidGardens": []
+    },
+    {
+      "id": "u_ao6mdrvom",
+      "email": "mazeneika2000@gmail.com",
+      "phone": "0000",
+      "name": "gggg",
+      "current_session_id": null,
+      "country": "",
+      "createdAt": "2026-06-28T05:22:39.000Z",
+      "passwordHash": "M",
+      "isVerified": 0,
+      "verificationCode": "122376",
+      "paidGardens": []
     }
   ],
   "emails": [],
   "gardens": [
     {
       "id": "g_b5n8d2c1f",
-      "titleen": "Programming HTML with Real Videos",
-      "titlear": "برمجة HTML فيديوهات واقعية",
-      "titletr": "Gerçek Videolarla HTML Programlama",
-      "descriptionen": "Learn HTML programming from scratch with hands-on video tutorials. Build real websites and understand modern web development fundamentals including HTML5, responsive design, and best practices.",
-      "descriptionar": "تعلم برمجة HTML من الصفر فيديوهات تعليمية عملية. قم ببناء مواقع ويب حقيقية وفهم أساسيات تطوير الويب الحديثة بما في ذلك HTML5 والتصميم المتجاوب وأفضل الممارسات.",
-      "descriptiontr": "Sıfırdan HTML programlamayı uygulamalı video eğitimleriyle öğrenin. HTML5, duyarlı tasarım ve en iyi uygulamalar dahil olmak üzere modern web geliştirme temellerini anlayarak gerçek web siteleri oluşturun.",
       "category": "Programming",
-      "priceegp": 600,
-      "pricetry": 180,
       "rating": "4.7",
-      "image": "/uploads/1782238556307-dlvpua.png"
+      "image": "/uploads/1782238556307-dlvpua.png",
+      "titleEn": "Programming HTML with Real Videos",
+      "titleAr": "برمجة HTML فيديوهات واقعية",
+      "titleTr": "Gerçek Videolarla HTML Programlama",
+      "descriptionEn": "Learn HTML programming from scratch with hands-on video tutorials. Build real websites and understand modern web development fundamentals including HTML5, responsive design, and best practices.",
+      "descriptionAr": "تعلم برمجة HTML من الصفر فيديوهات تعليمية عملية. قم ببناء مواقع ويب حقيقية وفهم أساسيات تطوير الويب الحديثة بما في ذلك HTML5 والتصميم المتجاوب وأفضل الممارسات.",
+      "descriptionTr": "Sıfırdan HTML programlamayı uygulamalı video eğitimleriyle öğrenin. HTML5, duyarlı tasarım ve en iyi uygulamalar dahil olmak üzere modern web geliştirme temellerini anlayarak gerçek web siteleri oluşturun.",
+      "priceEGP": 600,
+      "priceTRY": 180
     },
     {
       "id": "g_h4r7t9w1q",
-      "titleen": "Marketing with Real Videos",
-      "titlear": "التسويق فيديوهات واقعية",
-      "titletr": "Gerçek Videolarla Pazarlama",
-      "descriptionen": "Master digital marketing strategies through real-world video case studies. Covers SEO, Google Ads, social media marketing, email marketing, content marketing, and brand building.",
-      "descriptionar": "إتقان استراتيجيات التسويق الرقمي من خلال دراسات حالة فيديو واقعية. يغطي تحسين محركات البحث وإعلانات جوجل والتسويق عبر وسائل التواصل الاجتماعي والتسويق عبر البريد الإلكتروني وتسويق المحتوى وبناء العلامة التجارية.",
-      "descriptiontr": "Gerçek dünya video vaka çalışmalarıyla dijital pazarlama stratejilerinde ustalaşın. SEO, Google Ads, sosyal medya pazarlaması, e-posta pazarlaması, içerik pazarlaması ve marka oluşturmayı kapsar.",
       "category": "Marketing",
-      "priceegp": 550,
-      "pricetry": 165,
       "rating": "4.6",
-      "image": "/uploads/1782638919302-8v6lau.jfif"
+      "image": "/uploads/1782638919302-8v6lau.jfif",
+      "titleEn": "Marketing with Real Videos",
+      "titleAr": "التسويق فيديوهات واقعية",
+      "titleTr": "Gerçek Videolarla Pazarlama",
+      "descriptionEn": "Master digital marketing strategies through real-world video case studies. Covers SEO, Google Ads, social media marketing, email marketing, content marketing, and brand building.",
+      "descriptionAr": "إتقان استراتيجيات التسويق الرقمي من خلال دراسات حالة فيديو واقعية. يغطي تحسين محركات البحث وإعلانات جوجل والتسويق عبر وسائل التواصل الاجتماعي والتسويق عبر البريد الإلكتروني وتسويق المحتوى وبناء العلامة التجارية.",
+      "descriptionTr": "Gerçek dünya video vaka çalışmalarıyla dijital pazarlama stratejilerinde ustalaşın. SEO, Google Ads, sosyal medya pazarlaması, e-posta pazarlaması, içerik pazarlaması ve marka oluşturmayı kapsar.",
+      "priceEGP": 550,
+      "priceTRY": 165
     },
     {
       "id": "g_k7m3x9p2r",
-      "titleen": "English with Real Videos",
-      "titlear": "الإنجليزية فيديوهات واقعية",
-      "titletr": "Gerçek Videolarla İngilizce",
-      "descriptionen": "A practical English course using real-world video content to improve your listening, speaking, and comprehension skills. Includes slow listening exercises, shadowing practice, and everyday conversations.",
-      "descriptionar": "دورة إنجليزية عملية باستخدام محتوى فيديو واقعي لتحسين مهارات الاستماع والتحدث والفهم. تتضمن تمارين استماع بطيء وتمارين التظليل والمحادثات اليومية.",
-      "descriptiontr": "Dinleme, konuşma ve anlama becerilerinizi geliştirmek için gerçek dünya video içeriği kullanan pratik bir İngilizce kursu. Yavaş dinleme alıştırmaları, gölgeleme pratiği ve günlük konuşmaları içerir.",
       "category": "Languages",
-      "priceegp": 500,
-      "pricetry": 150,
       "rating": "4.5",
-      "image": "/uploads/1782238556307-dlvpua.png"
+      "image": "/uploads/1782238556307-dlvpua.png",
+      "titleEn": "English with Real Videos",
+      "titleAr": "الإنجليزية فيديوهات واقعية",
+      "titleTr": "Gerçek Videolarla İngilizce",
+      "descriptionEn": "A practical English course using real-world video content to improve your listening, speaking, and comprehension skills. Includes slow listening exercises, shadowing practice, and everyday conversations.",
+      "descriptionAr": "دورة إنجليزية عملية باستخدام محتوى فيديو واقعي لتحسين مهارات الاستماع والتحدث والفهم. تتضمن تمارين استماع بطيء وتمارين التظليل والمحادثات اليومية.",
+      "descriptionTr": "Dinleme, konuşma ve anlama becerilerinizi geliştirmek için gerçek dünya video içeriği kullanan pratik bir İngilizce kursu. Yavaş dinleme alıştırmaları, gölgeleme pratiği ve günlük konuşmaları içerir.",
+      "priceEGP": 500,
+      "priceTRY": 150
     }
   ],
   "seeds": [
     {
       "id": "s_e_9",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Future Tenses & Plans",
-      "titlear": "أزمنة المستقبل والخطط",
-      "titletr": "Gelecek Zamanlar ve Planlar",
       "duration": "20:45",
-      "videourl": "https://www.youtube.com/embed/uqpkkMR7EII",
       "status": "bloomed",
       "section": "Grammar",
-      "sortorder": 9,
       "tags": [
         "Grammar",
         "Future"
-      ]
+      ],
+      "titleEn": "Future Tenses & Plans",
+      "titleAr": "أزمنة المستقبل والخطط",
+      "titleTr": "Gelecek Zamanlar ve Planlar",
+      "videoUrl": "https://www.youtube.com/embed/uqpkkMR7EII",
+      "sortOrder": 9,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_h_4",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Headings, Paragraphs & Text Formatting",
-      "titlear": "العناوين والفقرات وتنسيق النص",
-      "titletr": "Başlıklar, Paragraflar ve Metin Biçimlendirme",
       "duration": "14:20",
-      "videourl": "https://www.youtube.com/embed/urT4pdM3sr4",
       "status": "bloomed",
       "section": "HTML Fundamentals",
-      "sortorder": 4,
       "tags": [
         "HTML",
         "Text",
         "Formatting"
-      ]
+      ],
+      "titleEn": "Headings, Paragraphs & Text Formatting",
+      "titleAr": "العناوين والفقرات وتنسيق النص",
+      "titleTr": "Başlıklar, Paragraflar ve Metin Biçimlendirme",
+      "videoUrl": "https://www.youtube.com/embed/urT4pdM3sr4",
+      "sortOrder": 4,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_e_17",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Conditionals & Reported Speech",
-      "titlear": "الجمل الشرطية والكلام المنقول",
-      "titletr": "Koşul Cümleleri ve Aktarılan Konuşma",
       "duration": "21:55",
-      "videourl": "https://www.youtube.com/embed/pvoqkQHb3lo",
       "status": "bloomed",
       "section": "Advanced English",
-      "sortorder": 17,
       "tags": [
         "Grammar",
         "Conditionals"
-      ]
+      ],
+      "titleEn": "Conditionals & Reported Speech",
+      "titleAr": "الجمل الشرطية والكلام المنقول",
+      "titleTr": "Koşul Cümleleri ve Aktarılan Konuşma",
+      "videoUrl": "https://www.youtube.com/embed/pvoqkQHb3lo",
+      "sortOrder": 17,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_m_5",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Off-Page SEO & Link Building",
-      "titlear": "SEO خارج الصفحة وبناء الروابط",
-      "titletr": "Sayfa Dışı SEO ve Bağlantı Oluşturma",
       "duration": "17:30",
-      "videourl": "https://www.youtube.com/embed/9Zp9cSyOkkY",
       "status": "bloomed",
       "section": "SEO & Search",
-      "sortorder": 5,
       "tags": [
         "SEO",
         "Link Building"
-      ]
+      ],
+      "titleEn": "Off-Page SEO & Link Building",
+      "titleAr": "SEO خارج الصفحة وبناء الروابط",
+      "titleTr": "Sayfa Dışı SEO ve Bağlantı Oluşturma",
+      "videoUrl": "https://www.youtube.com/embed/9Zp9cSyOkkY",
+      "sortOrder": 5,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_m_10",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Content Marketing & Blogging",
-      "titlear": "تسويق المحتوى والتدوين",
-      "titletr": "İçerik Pazarlaması ve Blog Yazarlığı",
       "duration": "19:20",
-      "videourl": "https://www.youtube.com/embed/McD5I1PavK8",
       "status": "bloomed",
       "section": "Content Marketing",
-      "sortorder": 10,
       "tags": [
         "Content",
         "Marketing"
-      ]
+      ],
+      "titleEn": "Content Marketing & Blogging",
+      "titleAr": "تسويق المحتوى والتدوين",
+      "titleTr": "İçerik Pazarlaması ve Blog Yazarlığı",
+      "videoUrl": "https://www.youtube.com/embed/McD5I1PavK8",
+      "sortOrder": 10,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_m_8",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Facebook & Instagram Advertising",
-      "titlear": "الإعلان على فيسبوك وانستغرام",
-      "titletr": "Facebook ve Instagram Reklamcılığı",
       "duration": "24:40",
-      "videourl": "https://www.youtube.com/embed/0R_3iarc8IA",
       "status": "bloomed",
       "section": "Social Media",
-      "sortorder": 8,
       "tags": [
         "Facebook",
         "Instagram",
         "Ads"
-      ]
+      ],
+      "titleEn": "Facebook & Instagram Advertising",
+      "titleAr": "الإعلان على فيسبوك وانستغرام",
+      "titleTr": "Facebook ve Instagram Reklamcılığı",
+      "videoUrl": "https://www.youtube.com/embed/0R_3iarc8IA",
+      "sortOrder": 8,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_h_18",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "SEO Basics for HTML",
-      "titlear": "أساسيات تحسين محركات البحث لـHTML",
-      "titletr": "HTML için SEO Temelleri",
       "duration": "15:50",
-      "videourl": "https://www.youtube.com/embed/ORazAn-Iigg",
       "status": "bloomed",
       "section": "Advanced HTML",
-      "sortorder": 18,
       "tags": [
         "SEO",
         "HTML"
-      ]
+      ],
+      "titleEn": "SEO Basics for HTML",
+      "titleAr": "أساسيات تحسين محركات البحث لـHTML",
+      "titleTr": "HTML için SEO Temelleri",
+      "videoUrl": "https://www.youtube.com/embed/ORazAn-Iigg",
+      "sortOrder": 18,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_h_9",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Form Validation & Advanced Input Types",
-      "titlear": "التحقق من صحة النموذج وأنواع الإدخال المتقدمة",
-      "titletr": "Form Doğrulama ve Gelişmiş Giriş Türleri",
       "duration": "19:50",
-      "videourl": "https://www.youtube.com/embed/dymj6TDzMpE",
       "status": "bloomed",
       "section": "Interactive HTML",
-      "sortorder": 9,
       "tags": [
         "HTML",
         "Forms",
         "Validation"
-      ]
+      ],
+      "titleEn": "Form Validation & Advanced Input Types",
+      "titleAr": "التحقق من صحة النموذج وأنواع الإدخال المتقدمة",
+      "titleTr": "Form Doğrulama ve Gelişmiş Giriş Türleri",
+      "videoUrl": "https://www.youtube.com/embed/dymj6TDzMpE",
+      "sortOrder": 9,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_m_6",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Google Ads & PPC Campaigns",
-      "titlear": "إعلانات جوجل وحملات الدفع بالنقرة",
-      "titletr": "Google Ads ve Tıklama Başına Ödeme Kampanyaları",
       "duration": "25:00",
-      "videourl": "https://www.youtube.com/embed/i3-Dvy4Wjb4",
       "status": "bloomed",
       "section": "SEO & Search",
-      "sortorder": 6,
       "tags": [
         "Google Ads",
         "PPC"
-      ]
+      ],
+      "titleEn": "Google Ads & PPC Campaigns",
+      "titleAr": "إعلانات جوجل وحملات الدفع بالنقرة",
+      "titleTr": "Google Ads ve Tıklama Başına Ödeme Kampanyaları",
+      "videoUrl": "https://www.youtube.com/embed/i3-Dvy4Wjb4",
+      "sortOrder": 6,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_h_19",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "HTML Meta Tags & Open Graph",
-      "titlear": "علامات HTML الوصفية وOpen Graph",
-      "titletr": "HTML Meta Etiketleri ve Open Graph",
       "duration": "12:10",
-      "videourl": "https://www.youtube.com/embed/bi5bfH_gVWE",
       "status": "bloomed",
       "section": "Advanced HTML",
-      "sortorder": 19,
       "tags": [
         "Meta",
         "SEO",
         "HTML"
-      ]
+      ],
+      "titleEn": "HTML Meta Tags & Open Graph",
+      "titleAr": "علامات HTML الوصفية وOpen Graph",
+      "titleTr": "HTML Meta Etiketleri ve Open Graph",
+      "videoUrl": "https://www.youtube.com/embed/bi5bfH_gVWE",
+      "sortOrder": 19,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_m_11",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Email Marketing & Newsletters",
-      "titlear": "التسويق عبر البريد الإلكتروني والنشرات البريدية",
-      "titletr": "E-posta Pazarlaması ve Bültenler",
       "duration": "18:05",
-      "videourl": "https://www.youtube.com/embed/_rm4SNmhDXA",
       "status": "bloomed",
       "section": "Content Marketing",
-      "sortorder": 11,
       "tags": [
         "Email",
         "Marketing"
-      ]
+      ],
+      "titleEn": "Email Marketing & Newsletters",
+      "titleAr": "التسويق عبر البريد الإلكتروني والنشرات البريدية",
+      "titleTr": "E-posta Pazarlaması ve Bültenler",
+      "videoUrl": "https://www.youtube.com/embed/_rm4SNmhDXA",
+      "sortOrder": 11,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_e_15",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Vocabulary Building: 100 Essential Words",
-      "titlear": "بناء المفردات: 100 كلمة أساسية",
-      "titletr": "Kelime Dağarcığı: 100 Temel Kelime",
       "duration": "24:10",
-      "videourl": "https://www.youtube.com/embed/hmhKtWZor7k",
       "status": "bloomed",
       "section": "Reading & Writing",
-      "sortorder": 15,
       "tags": [
         "Vocabulary",
         "Words"
-      ]
+      ],
+      "titleEn": "Vocabulary Building: 100 Essential Words",
+      "titleAr": "بناء المفردات: 100 كلمة أساسية",
+      "titleTr": "Kelime Dağarcığı: 100 Temel Kelime",
+      "videoUrl": "https://www.youtube.com/embed/hmhKtWZor7k",
+      "sortOrder": 15,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_h_15",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Building a Complete Landing Page",
-      "titlear": "بناء صفحة هبوط كاملة",
-      "titletr": "Tam Bir Açılış Sayfası Oluşturma",
       "duration": "28:30",
-      "videourl": "https://www.youtube.com/embed/zizm-rEGlgA",
       "status": "bloomed",
       "section": "Projects",
-      "sortorder": 15,
       "tags": [
         "HTML",
         "CSS",
         "Project"
-      ]
+      ],
+      "titleEn": "Building a Complete Landing Page",
+      "titleAr": "بناء صفحة هبوط كاملة",
+      "titleTr": "Tam Bir Açılış Sayfası Oluşturma",
+      "videoUrl": "https://www.youtube.com/embed/zizm-rEGlgA",
+      "sortOrder": 15,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_e_2",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "English Alphabet & Pronunciation Basics",
-      "titlear": "الأبجدية الإنجليزية وأساسيات النطق",
-      "titletr": "İngiliz Alfabesi ve Telaffuz Temelleri",
       "duration": "14:30",
-      "videourl": "https://www.youtube.com/embed/ZlO8Si2OkKk",
       "status": "bloomed",
       "section": "Foundations",
-      "sortorder": 2,
       "tags": [
         "Pronunciation",
         "Alphabet"
-      ]
+      ],
+      "titleEn": "English Alphabet & Pronunciation Basics",
+      "titleAr": "الأبجدية الإنجليزية وأساسيات النطق",
+      "titleTr": "İngiliz Alfabesi ve Telaffuz Temelleri",
+      "videoUrl": "https://www.youtube.com/embed/ZlO8Si2OkKk",
+      "sortOrder": 2,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_e_18",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Business English & Meetings",
-      "titlear": "الإنجليزية للأعمال والاجتماعات",
-      "titletr": "İş İngilizcesi ve Toplantılar",
       "duration": "23:20",
-      "videourl": "https://www.youtube.com/embed/Jpz9xUJ9FWQ",
       "status": "bloomed",
       "section": "Advanced English",
-      "sortorder": 18,
       "tags": [
         "Business",
         "Meetings"
-      ]
+      ],
+      "titleEn": "Business English & Meetings",
+      "titleAr": "الإنجليزية للأعمال والاجتماعات",
+      "titleTr": "İş İngilizcesi ve Toplantılar",
+      "videoUrl": "https://www.youtube.com/embed/Jpz9xUJ9FWQ",
+      "sortOrder": 18,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_h_10",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Semantic HTML5 Elements",
-      "titlear": "عناصر HTML5 الدلالية",
-      "titletr": "Semantik HTML5 Öğeleri",
       "duration": "17:25",
-      "videourl": "https://www.youtube.com/embed/JNFdCgmMkPk",
       "status": "bloomed",
       "section": "Interactive HTML",
-      "sortorder": 10,
       "tags": [
         "HTML5",
         "Semantic"
-      ]
+      ],
+      "titleEn": "Semantic HTML5 Elements",
+      "titleAr": "عناصر HTML5 الدلالية",
+      "titleTr": "Semantik HTML5 Öğeleri",
+      "videoUrl": "https://www.youtube.com/embed/JNFdCgmMkPk",
+      "sortOrder": 10,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_e_10",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Listening Practice: Slow & Clear Speech",
-      "titlear": "تمارين الاستماع: كلام بطيء وواضح",
-      "titletr": "Dinleme Pratiği: Yavaş ve Net Konuşma",
       "duration": "22:00",
-      "videourl": "https://www.youtube.com/embed/8vPXIsAqmjg",
       "status": "bloomed",
       "section": "Listening & Speaking",
-      "sortorder": 10,
       "tags": [
         "Listening",
         "Slow Speech"
-      ]
+      ],
+      "titleEn": "Listening Practice: Slow & Clear Speech",
+      "titleAr": "تمارين الاستماع: كلام بطيء وواضح",
+      "titleTr": "Dinleme Pratiği: Yavaş ve Net Konuşma",
+      "videoUrl": "https://www.youtube.com/embed/8vPXIsAqmjg",
+      "sortOrder": 10,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_h_7",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Tables & Tabular Data",
-      "titlear": "الجداول والبيانات الجدولية",
-      "titletr": "Tablolar ve Tablo Verileri",
       "duration": "16:40",
-      "videourl": "https://www.youtube.com/embed/iDA0kF5lrVk",
       "status": "bloomed",
       "section": "HTML Fundamentals",
-      "sortorder": 7,
       "tags": [
         "HTML",
         "Tables"
-      ]
+      ],
+      "titleEn": "Tables & Tabular Data",
+      "titleAr": "الجداول والبيانات الجدولية",
+      "titleTr": "Tablolar ve Tablo Verileri",
+      "videoUrl": "https://www.youtube.com/embed/iDA0kF5lrVk",
+      "sortOrder": 7,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_h_14",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Responsive Design with HTML",
-      "titlear": "التصميم المتجاوب مع HTML",
-      "titletr": "HTML ile Duyarlı Tasarım",
       "duration": "14:45",
-      "videourl": "https://www.youtube.com/embed/srvUrASNj0s",
       "status": "bloomed",
       "section": "Advanced HTML",
-      "sortorder": 14,
       "tags": [
         "Responsive",
         "HTML5"
-      ]
+      ],
+      "titleEn": "Responsive Design with HTML",
+      "titleAr": "التصميم المتجاوب مع HTML",
+      "titleTr": "HTML ile Duyarlı Tasarım",
+      "videoUrl": "https://www.youtube.com/embed/srvUrASNj0s",
+      "sortOrder": 14,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_h_12",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Audio & Video Embedding",
-      "titlear": "تضمين الصوت والفيديو",
-      "titletr": "Ses ve Video Ekleme",
       "duration": "13:35",
-      "videourl": "https://www.youtube.com/embed/uof_zYxtnp0",
       "status": "bloomed",
       "section": "Advanced HTML",
-      "sortorder": 12,
       "tags": [
         "HTML5",
         "Audio",
         "Video"
-      ]
+      ],
+      "titleEn": "Audio & Video Embedding",
+      "titleAr": "تضمين الصوت والفيديو",
+      "titleTr": "Ses ve Video Ekleme",
+      "videoUrl": "https://www.youtube.com/embed/uof_zYxtnp0",
+      "sortOrder": 12,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_h_3",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "HTML Document Structure & Elements",
-      "titlear": "هيكل مستند HTML والعناصر",
-      "titletr": "HTML Belge Yapısı ve Öğeler",
       "duration": "18:45",
-      "videourl": "https://www.youtube.com/embed/h30Bvg4MhY0",
       "status": "bloomed",
       "section": "Getting Started",
-      "sortorder": 3,
       "tags": [
         "HTML",
         "Structure"
-      ]
+      ],
+      "titleEn": "HTML Document Structure & Elements",
+      "titleAr": "هيكل مستند HTML والعناصر",
+      "titleTr": "HTML Belge Yapısı ve Öğeler",
+      "videoUrl": "https://www.youtube.com/embed/h30Bvg4MhY0",
+      "sortOrder": 3,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_e_20",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Final Assessment & Fluency Check",
-      "titlear": "التقييم النهائي وفحص الطلاقة",
-      "titletr": "Final Değerlendirmesi ve Akıcılık Kontrolü",
       "duration": "28:00",
-      "videourl": "https://www.youtube.com/embed/RTAwB-5Fv48",
       "status": "bloomed",
       "section": "Practical English",
-      "sortorder": 20,
       "tags": [
         "Assessment",
         "Fluency"
-      ]
+      ],
+      "titleEn": "Final Assessment & Fluency Check",
+      "titleAr": "التقييم النهائي وفحص الطلاقة",
+      "titleTr": "Final Değerlendirmesi ve Akıcılık Kontrolü",
+      "videoUrl": "https://www.youtube.com/embed/RTAwB-5Fv48",
+      "sortOrder": 20,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_h_17",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "HTML Email Templates",
-      "titlear": "قوالب البريد الإلكتروني HTML",
-      "titletr": "HTML E-posta Şablonları",
       "duration": "18:20",
-      "videourl": "https://www.youtube.com/embed/Fazo5hXEdv4",
       "status": "bloomed",
       "section": "Projects",
-      "sortorder": 17,
       "tags": [
         "Email",
         "HTML"
-      ]
+      ],
+      "titleEn": "HTML Email Templates",
+      "titleAr": "قوالب البريد الإلكتروني HTML",
+      "titleTr": "HTML E-posta Şablonları",
+      "videoUrl": "https://www.youtube.com/embed/Fazo5hXEdv4",
+      "sortOrder": 17,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_h_1",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Introduction to HTML & Web Basics",
-      "titlear": "مقدمة في HTML وأساسيات الويب",
-      "titletr": "HTML ve Web Temellerine Giriş",
       "duration": "12:30",
-      "videourl": "https://www.youtube.com/embed/-CNdRywgF7M",
       "status": "bloomed",
       "section": "Getting Started",
-      "sortorder": 1,
       "tags": [
         "HTML",
         "Web",
         "Basics"
-      ]
+      ],
+      "titleEn": "Introduction to HTML & Web Basics",
+      "titleAr": "مقدمة في HTML وأساسيات الويب",
+      "titleTr": "HTML ve Web Temellerine Giriş",
+      "videoUrl": "https://www.youtube.com/embed/-CNdRywgF7M",
+      "sortOrder": 1,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_m_12",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Video Marketing & Content",
-      "titlear": "التسويق عبر الفيديو والمحتوى",
-      "titletr": "Video Pazarlaması ve İçerik",
       "duration": "23:15",
-      "videourl": "https://www.youtube.com/embed/vV3g5VuSrIQ",
       "status": "bloomed",
       "section": "Content Marketing",
-      "sortorder": 12,
       "tags": [
         "Video",
         "Content"
-      ]
+      ],
+      "titleEn": "Video Marketing & Content",
+      "titleAr": "التسويق عبر الفيديو والمحتوى",
+      "titleTr": "Video Pazarlaması ve İçerik",
+      "videoUrl": "https://www.youtube.com/embed/vV3g5VuSrIQ",
+      "sortOrder": 12,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_m_14",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "A/B Testing & Conversion Optimization",
-      "titlear": "اختبار A/B وتحسين التحويل",
-      "titletr": "A/B Testi ve Dönüşüm Optimizasyonu",
       "duration": "16:40",
-      "videourl": "https://www.youtube.com/embed/ExV24jFfi_g",
       "status": "bloomed",
       "section": "Analytics & Optimization",
-      "sortorder": 14,
       "tags": [
         "Testing",
         "Conversion"
-      ]
+      ],
+      "titleEn": "A/B Testing & Conversion Optimization",
+      "titleAr": "اختبار A/B وتحسين التحويل",
+      "titleTr": "A/B Testi ve Dönüşüm Optimizasyonu",
+      "videoUrl": "https://www.youtube.com/embed/ExV24jFfi_g",
+      "sortOrder": 14,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_e_6",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Food, Shopping & Restaurants",
-      "titlear": "الطعام والتسوق والمطاعم",
-      "titletr": "Yemek, Alışveriş ve Restoranlar",
       "duration": "21:05",
-      "videourl": "https://www.youtube.com/embed/4C4wlOAscvY",
       "status": "bloomed",
       "section": "Everyday English",
-      "sortorder": 6,
       "tags": [
         "Food",
         "Shopping"
-      ]
+      ],
+      "titleEn": "Food, Shopping & Restaurants",
+      "titleAr": "الطعام والتسوق والمطاعم",
+      "titleTr": "Yemek, Alışveriş ve Restoranlar",
+      "videoUrl": "https://www.youtube.com/embed/4C4wlOAscvY",
+      "sortOrder": 6,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_m_1",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Introduction to Digital Marketing",
-      "titlear": "مقدمة في التسويق الرقمي",
-      "titletr": "Dijital Pazarlamaya Giriş",
       "duration": "15:00",
-      "videourl": "https://www.youtube.com/embed/6RNJpItArSQ",
       "status": "bloomed",
       "section": "Marketing Fundamentals",
-      "sortorder": 1,
       "tags": [
         "Marketing",
         "Digital"
-      ]
+      ],
+      "titleEn": "Introduction to Digital Marketing",
+      "titleAr": "مقدمة في التسويق الرقمي",
+      "titleTr": "Dijital Pazarlamaya Giriş",
+      "videoUrl": "https://www.youtube.com/embed/6RNJpItArSQ",
+      "sortOrder": 1,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_h_11",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "HTML5 APIs: Canvas & SVG",
-      "titlear": "واجهات برمجة تطبيقات HTML5: كانفاس وSVG",
-      "titletr": "HTML5 API: Canvas ve SVG",
       "duration": "25:00",
-      "videourl": "https://www.youtube.com/embed/Yvz_axxWG4Y",
       "status": "bloomed",
       "section": "Advanced HTML",
-      "sortorder": 11,
       "tags": [
         "HTML5",
         "Canvas",
         "SVG"
-      ]
+      ],
+      "titleEn": "HTML5 APIs: Canvas & SVG",
+      "titleAr": "واجهات برمجة تطبيقات HTML5: كانفاس وSVG",
+      "titleTr": "HTML5 API: Canvas ve SVG",
+      "videoUrl": "https://www.youtube.com/embed/Yvz_axxWG4Y",
+      "sortOrder": 11,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_e_13",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Reading Comprehension: News & Articles",
-      "titlear": "فهم القراءة: الأخبار والمقالات",
-      "titletr": "Okuma Anlama: Haberler ve Makaleler",
       "duration": "18:50",
-      "videourl": "https://www.youtube.com/embed/ORHniANns7k",
       "status": "bloomed",
       "section": "Reading & Writing",
-      "sortorder": 13,
       "tags": [
         "Reading",
         "Articles"
-      ]
+      ],
+      "titleEn": "Reading Comprehension: News & Articles",
+      "titleAr": "فهم القراءة: الأخبار والمقالات",
+      "titleTr": "Okuma Anlama: Haberler ve Makaleler",
+      "videoUrl": "https://www.youtube.com/embed/ORHniANns7k",
+      "sortOrder": 13,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_e_8",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Past Tenses: Simple, Continuous & Perfect",
-      "titlear": "أزمنة الماضي: البسيط والمستمر والتام",
-      "titletr": "Geçmiş Zamanlar: Basit, Sürekli ve Mükemmel",
       "duration": "25:10",
-      "videourl": "https://www.youtube.com/embed/OqOrfiv2Sfg",
       "status": "bloomed",
       "section": "Grammar",
-      "sortorder": 8,
       "tags": [
         "Grammar",
         "Past Tense"
-      ]
+      ],
+      "titleEn": "Past Tenses: Simple, Continuous & Perfect",
+      "titleAr": "أزمنة الماضي: البسيط والمستمر والتام",
+      "titleTr": "Geçmiş Zamanlar: Basit, Sürekli ve Mükemmel",
+      "videoUrl": "https://www.youtube.com/embed/OqOrfiv2Sfg",
+      "sortOrder": 8,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_e_11",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Shadowing Technique for Fluency",
-      "titlear": "تقنية التظليل للطلاقة",
-      "titletr": "Akıcılık için Gölgeleme Tekniği",
       "duration": "17:35",
-      "videourl": "https://www.youtube.com/embed/cBCh2bAu2aA",
       "status": "bloomed",
       "section": "Listening & Speaking",
-      "sortorder": 11,
       "tags": [
         "Speaking",
         "Shadowing"
-      ]
+      ],
+      "titleEn": "Shadowing Technique for Fluency",
+      "titleAr": "تقنية التظليل للطلاقة",
+      "titleTr": "Akıcılık için Gölgeleme Tekniği",
+      "videoUrl": "https://www.youtube.com/embed/cBCh2bAu2aA",
+      "sortOrder": 11,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_h_16",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Building a Multi-Page Website",
-      "titlear": "بناء موقع ويب متعدد الصفحات",
-      "titletr": "Çok Sayfalı Bir Web Sitesi Oluşturma",
       "duration": "32:00",
-      "videourl": "https://www.youtube.com/embed/iXSSHlOe47s",
       "status": "bloomed",
       "section": "Projects",
-      "sortorder": 16,
       "tags": [
         "Project",
         "HTML"
-      ]
+      ],
+      "titleEn": "Building a Multi-Page Website",
+      "titleAr": "بناء موقع ويب متعدد الصفحات",
+      "titleTr": "Çok Sayfalı Bir Web Sitesi Oluşturma",
+      "videoUrl": "https://www.youtube.com/embed/iXSSHlOe47s",
+      "sortOrder": 16,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_h_6",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Lists: Ordered, Unordered & Description",
-      "titlear": "القوائم: المرتبة وغير المرتبة والوصفية",
-      "titletr": "Listeler: Sıralı, Sırasız ve Açıklamalı",
       "duration": "11:30",
-      "videourl": "https://www.youtube.com/embed/oUm7rvMUNq8",
       "status": "bloomed",
       "section": "HTML Fundamentals",
-      "sortorder": 6,
       "tags": [
         "HTML",
         "Lists"
-      ]
+      ],
+      "titleEn": "Lists: Ordered, Unordered & Description",
+      "titleAr": "القوائم: المرتبة وغير المرتبة والوصفية",
+      "titleTr": "Listeler: Sıralı, Sırasız ve Açıklamalı",
+      "videoUrl": "https://www.youtube.com/embed/oUm7rvMUNq8",
+      "sortOrder": 6,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_m_3",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Keyword Research & Strategy",
-      "titlear": "بحث الكلمات المفتاحية والاستراتيجية",
-      "titletr": "Anahtar Kelime Araştırması ve Stratejisi",
       "duration": "18:45",
-      "videourl": "https://www.youtube.com/embed/VG4l39h_qFU",
       "status": "bloomed",
       "section": "Marketing Fundamentals",
-      "sortorder": 3,
       "tags": [
         "SEO",
         "Keywords"
-      ]
+      ],
+      "titleEn": "Keyword Research & Strategy",
+      "titleAr": "بحث الكلمات المفتاحية والاستراتيجية",
+      "titleTr": "Anahtar Kelime Araştırması ve Stratejisi",
+      "videoUrl": "https://www.youtube.com/embed/VG4l39h_qFU",
+      "sortOrder": 3,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_e_12",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Everyday Conversations & Role Plays",
-      "titlear": "محادثات يومية ولعب الأدوار",
-      "titletr": "Günlük Konuşmalar ve Rol Oyunları",
       "duration": "26:15",
-      "videourl": "https://www.youtube.com/embed/vpLAEWlkL4k",
       "status": "bloomed",
       "section": "Listening & Speaking",
-      "sortorder": 12,
       "tags": [
         "Conversation",
         "Roles"
-      ]
+      ],
+      "titleEn": "Everyday Conversations & Role Plays",
+      "titleAr": "محادثات يومية ولعب الأدوار",
+      "titleTr": "Günlük Konuşmalar ve Rol Oyunları",
+      "videoUrl": "https://www.youtube.com/embed/vpLAEWlkL4k",
+      "sortOrder": 12,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_e_3",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Common Greetings & Introductions",
-      "titlear": "التحيات الشائعة والتعارف",
-      "titletr": "Yaygın Selamlaşmalar ve Tanışmalar",
       "duration": "16:15",
-      "videourl": "https://www.youtube.com/embed/JFmLF_xOAog",
       "status": "bloomed",
       "section": "Foundations",
-      "sortorder": 3,
       "tags": [
         "Conversation",
         "Greetings"
-      ]
+      ],
+      "titleEn": "Common Greetings & Introductions",
+      "titleAr": "التحيات الشائعة والتعارف",
+      "titleTr": "Yaygın Selamlaşmalar ve Tanışmalar",
+      "videoUrl": "https://www.youtube.com/embed/JFmLF_xOAog",
+      "sortOrder": 3,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_m_16",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Brand Building & Positioning",
-      "titlear": "بناء العلامة التجارية وتحديد المواقع",
-      "titletr": "Marka Oluşturma ve Konumlandırma",
       "duration": "14:25",
-      "videourl": "https://www.youtube.com/embed/3dW5RJxX_gQ",
       "status": "bloomed",
       "section": "Brand & Strategy",
-      "sortorder": 16,
       "tags": [
         "Brand",
         "Strategy"
-      ]
+      ],
+      "titleEn": "Brand Building & Positioning",
+      "titleAr": "بناء العلامة التجارية وتحديد المواقع",
+      "titleTr": "Marka Oluşturma ve Konumlandırma",
+      "videoUrl": "https://www.youtube.com/embed/3dW5RJxX_gQ",
+      "sortOrder": 16,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_m_9",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "LinkedIn & Twitter Marketing",
-      "titlear": "التسويق عبر لينكد إن وتويتر",
-      "titletr": "LinkedIn ve Twitter Pazarlaması",
       "duration": "16:55",
-      "videourl": "https://www.youtube.com/embed/OrbhGa4aeAM",
       "status": "bloomed",
       "section": "Social Media",
-      "sortorder": 9,
       "tags": [
         "LinkedIn",
         "Twitter"
-      ]
+      ],
+      "titleEn": "LinkedIn & Twitter Marketing",
+      "titleAr": "التسويق عبر لينكد إن وتويتر",
+      "titleTr": "LinkedIn ve Twitter Pazarlaması",
+      "videoUrl": "https://www.youtube.com/embed/OrbhGa4aeAM",
+      "sortOrder": 9,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_e_4",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Numbers, Dates & Time Expressions",
-      "titlear": "الأرقام والتواريخ والتعبيرات الزمنية",
-      "titletr": "Sayılar, Tarihler ve Zaman İfadeleri",
       "duration": "18:40",
-      "videourl": "https://www.youtube.com/embed/yay1OUgMSlo",
       "status": "bloomed",
       "section": "Everyday English",
-      "sortorder": 4,
       "tags": [
         "Numbers",
         "Time"
-      ]
+      ],
+      "titleEn": "Numbers, Dates & Time Expressions",
+      "titleAr": "الأرقام والتواريخ والتعبيرات الزمنية",
+      "titleTr": "Sayılar, Tarihler ve Zaman İfadeleri",
+      "videoUrl": "https://www.youtube.com/embed/yay1OUgMSlo",
+      "sortOrder": 4,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_h_13",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "HTML Best Practices & Accessibility",
-      "titlear": "أفضل ممارسات HTML وإمكانية الوصول",
-      "titletr": "HTML En İyi Uygulamalar ve Erişilebilirlik",
       "duration": "16:10",
-      "videourl": "https://www.youtube.com/embed/_9zMrs8_XHM",
       "status": "bloomed",
       "section": "Advanced HTML",
-      "sortorder": 13,
       "tags": [
         "HTML",
         "Accessibility",
         "Best Practices"
-      ]
+      ],
+      "titleEn": "HTML Best Practices & Accessibility",
+      "titleAr": "أفضل ممارسات HTML وإمكانية الوصول",
+      "titleTr": "HTML En İyi Uygulamalar ve Erişilebilirlik",
+      "videoUrl": "https://www.youtube.com/embed/_9zMrs8_XHM",
+      "sortOrder": 13,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_e_16",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Phrasal Verbs & Idioms",
-      "titlear": "الأفعال المركبة والتعابير الاصطلاحية",
-      "titletr": "Phrasal Verbs ve Deyimler",
       "duration": "19:40",
-      "videourl": "https://www.youtube.com/embed/ZDRz6Xn8Ha0",
       "status": "bloomed",
       "section": "Advanced English",
-      "sortorder": 16,
       "tags": [
         "Phrasal Verbs",
         "Idioms"
-      ]
+      ],
+      "titleEn": "Phrasal Verbs & Idioms",
+      "titleAr": "الأفعال المركبة والتعابير الاصطلاحية",
+      "titleTr": "Phrasal Verbs ve Deyimler",
+      "videoUrl": "https://www.youtube.com/embed/ZDRz6Xn8Ha0",
+      "sortOrder": 16,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_m_18",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Marketing Budget Planning",
-      "titlear": "تخطيط ميزانية التسويق",
-      "titletr": "Pazarlama Bütçesi Planlaması",
       "duration": "17:15",
-      "videourl": "https://www.youtube.com/embed/5altc8xTzBg",
       "status": "bloomed",
       "section": "Brand & Strategy",
-      "sortorder": 18,
       "tags": [
         "Budget",
         "Planning"
-      ]
+      ],
+      "titleEn": "Marketing Budget Planning",
+      "titleAr": "تخطيط ميزانية التسويق",
+      "titleTr": "Pazarlama Bütçesi Planlaması",
+      "videoUrl": "https://www.youtube.com/embed/5altc8xTzBg",
+      "sortOrder": 18,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_m_19",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Building a Marketing Campaign",
-      "titlear": "بناء حملة تسويقية",
-      "titletr": "Pazarlama Kampanyası Oluşturma",
       "duration": "30:00",
-      "videourl": "https://www.youtube.com/embed/-dCls0VoY58",
       "status": "bloomed",
       "section": "Campaign Projects",
-      "sortorder": 19,
       "tags": [
         "Campaign",
         "Project"
-      ]
+      ],
+      "titleEn": "Building a Marketing Campaign",
+      "titleAr": "بناء حملة تسويقية",
+      "titleTr": "Pazarlama Kampanyası Oluşturma",
+      "videoUrl": "https://www.youtube.com/embed/-dCls0VoY58",
+      "sortOrder": 19,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_e_5",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Describing People & Places",
-      "titlear": "وصف الأشخاص والأماكن",
-      "titletr": "İnsanları ve Yerleri Tanımlama",
       "duration": "19:20",
-      "videourl": "https://www.youtube.com/embed/x0YQX7gGkQs",
       "status": "bloomed",
       "section": "Everyday English",
-      "sortorder": 5,
       "tags": [
         "Description",
         "Vocabulary"
-      ]
+      ],
+      "titleEn": "Describing People & Places",
+      "titleAr": "وصف الأشخاص والأماكن",
+      "titleTr": "İnsanları ve Yerleri Tanımlama",
+      "videoUrl": "https://www.youtube.com/embed/x0YQX7gGkQs",
+      "sortOrder": 5,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_m_7",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Social Media Marketing Strategy",
-      "titlear": "استراتيجية التسويق عبر وسائل التواصل الاجتماعي",
-      "titletr": "Sosyal Medya Pazarlama Stratejisi",
       "duration": "21:10",
-      "videourl": "https://www.youtube.com/embed/InUm7A-Ws-M",
       "status": "bloomed",
       "section": "Social Media",
-      "sortorder": 7,
       "tags": [
         "Social Media",
         "Strategy"
-      ]
+      ],
+      "titleEn": "Social Media Marketing Strategy",
+      "titleAr": "استراتيجية التسويق عبر وسائل التواصل الاجتماعي",
+      "titleTr": "Sosyal Medya Pazarlama Stratejisi",
+      "videoUrl": "https://www.youtube.com/embed/InUm7A-Ws-M",
+      "sortOrder": 7,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_m_4",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "On-Page SEO Optimization",
-      "titlear": "تحسين SEO على الصفحة",
-      "titletr": "Sayfa İçi SEO Optimizasyonu",
       "duration": "20:15",
-      "videourl": "https://www.youtube.com/embed/cqDJYffvqFE",
       "status": "bloomed",
       "section": "SEO & Search",
-      "sortorder": 4,
       "tags": [
         "SEO",
         "On-Page"
-      ]
+      ],
+      "titleEn": "On-Page SEO Optimization",
+      "titleAr": "تحسين SEO على الصفحة",
+      "titleTr": "Sayfa İçi SEO Optimizasyonu",
+      "videoUrl": "https://www.youtube.com/embed/cqDJYffvqFE",
+      "sortOrder": 4,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_e_19",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "English for Travel & Tourism",
-      "titlear": "الإنجليزية للسفر والسياحة",
-      "titletr": "Seyahat ve Turizm için İngilizce",
       "duration": "15:30",
-      "videourl": "https://www.youtube.com/embed/pfRw6wg-QqE",
       "status": "bloomed",
       "section": "Practical English",
-      "sortorder": 19,
       "tags": [
         "Travel",
         "Tourism"
-      ]
+      ],
+      "titleEn": "English for Travel & Tourism",
+      "titleAr": "الإنجليزية للسفر والسياحة",
+      "titleTr": "Seyahat ve Turizm için İngilizce",
+      "videoUrl": "https://www.youtube.com/embed/pfRw6wg-QqE",
+      "sortOrder": 19,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_m_13",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Marketing Analytics & KPIs",
-      "titlear": "تحليلات التسويق ومؤشرات الأداء",
-      "titletr": "Pazarlama Analitiği ve KPI",
       "duration": "20:30",
-      "videourl": "https://www.youtube.com/embed/bsMUsPCblS8",
       "status": "bloomed",
       "section": "Analytics & Optimization",
-      "sortorder": 13,
       "tags": [
         "Analytics",
         "KPI"
-      ]
+      ],
+      "titleEn": "Marketing Analytics & KPIs",
+      "titleAr": "تحليلات التسويق ومؤشرات الأداء",
+      "titleTr": "Pazarlama Analitiği ve KPI",
+      "videoUrl": "https://www.youtube.com/embed/bsMUsPCblS8",
+      "sortOrder": 13,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_h_20",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Course Wrap-Up & Next Steps",
-      "titlear": "ختام الدورة والخطوات التالية",
-      "titletr": "Kurs Özeti ve Sonraki Adımlar",
       "duration": "10:00",
-      "videourl": "https://www.youtube.com/embed/HD13eq_Pmp8",
       "status": "bloomed",
       "section": "Projects",
-      "sortorder": 20,
       "tags": [
         "Wrap-Up"
-      ]
+      ],
+      "titleEn": "Course Wrap-Up & Next Steps",
+      "titleAr": "ختام الدورة والخطوات التالية",
+      "titleTr": "Kurs Özeti ve Sonraki Adımlar",
+      "videoUrl": "https://www.youtube.com/embed/HD13eq_Pmp8",
+      "sortOrder": 20,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_m_15",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Google Analytics Mastery",
-      "titlear": "إتقان جوجل أناليتكس",
-      "titletr": "Google Analytics Ustalığı",
       "duration": "27:50",
-      "videourl": "https://www.youtube.com/embed/yleOEYiQohI",
       "status": "bloomed",
       "section": "Analytics & Optimization",
-      "sortorder": 15,
       "tags": [
         "Google Analytics",
         "Tools"
-      ]
+      ],
+      "titleEn": "Google Analytics Mastery",
+      "titleAr": "إتقان جوجل أناليتكس",
+      "titleTr": "Google Analytics Ustalığı",
+      "videoUrl": "https://www.youtube.com/embed/yleOEYiQohI",
+      "sortOrder": 15,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_h_2",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Setting Up Your Development Environment",
-      "titlear": "إعداد بيئة التطوير",
-      "titletr": "Geliştirme Ortamını Kurma",
       "duration": "15:00",
-      "videourl": "https://www.youtube.com/embed/JZugtm7VwFk",
       "status": "bloomed",
       "section": "Getting Started",
-      "sortorder": 2,
       "tags": [
         "Tools",
         "Setup"
-      ]
+      ],
+      "titleEn": "Setting Up Your Development Environment",
+      "titleAr": "إعداد بيئة التطوير",
+      "titleTr": "Geliştirme Ortamını Kurma",
+      "videoUrl": "https://www.youtube.com/embed/JZugtm7VwFk",
+      "sortOrder": 2,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_e_7",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Present Simple & Continuous Tenses",
-      "titlear": "زمن المضارع البسيط والمستمر",
-      "titletr": "Geniş Zaman ve Şimdiki Zaman",
       "duration": "23:30",
-      "videourl": "https://www.youtube.com/embed/X6LuWwb9whM",
       "status": "bloomed",
       "section": "Grammar",
-      "sortorder": 7,
       "tags": [
         "Grammar",
         "Tenses"
-      ]
+      ],
+      "titleEn": "Present Simple & Continuous Tenses",
+      "titleAr": "زمن المضارع البسيط والمستمر",
+      "titleTr": "Geniş Zaman ve Şimdiki Zaman",
+      "videoUrl": "https://www.youtube.com/embed/X6LuWwb9whM",
+      "sortOrder": 7,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_h_8",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Forms & Input Elements",
-      "titlear": "النماذج وعناصر الإدخال",
-      "titletr": "Formlar ve Giriş Öğeleri",
       "duration": "22:15",
-      "videourl": "https://www.youtube.com/embed/2O8pkybH6po",
       "status": "bloomed",
       "section": "Interactive HTML",
-      "sortorder": 8,
       "tags": [
         "HTML",
         "Forms",
         "Input"
-      ]
+      ],
+      "titleEn": "Forms & Input Elements",
+      "titleAr": "النماذج وعناصر الإدخال",
+      "titleTr": "Formlar ve Giriş Öğeleri",
+      "videoUrl": "https://www.youtube.com/embed/2O8pkybH6po",
+      "sortOrder": 8,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_m_2",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "SEO Fundamentals - How Search Engines Work",
-      "titlear": "أساسيات تحسين محركات البحث - كيف تعمل محركات البحث",
-      "titletr": "SEO Temelleri - Arama Motorları Nasıl Çalışır",
       "duration": "22:30",
-      "videourl": "https://www.youtube.com/embed/OYRkIGaP80M",
       "status": "bloomed",
       "section": "Marketing Fundamentals",
-      "sortorder": 2,
       "tags": [
         "SEO",
         "Search"
-      ]
+      ],
+      "titleEn": "SEO Fundamentals - How Search Engines Work",
+      "titleAr": "أساسيات تحسين محركات البحث - كيف تعمل محركات البحث",
+      "titleTr": "SEO Temelleri - Arama Motorları Nasıl Çalışır",
+      "videoUrl": "https://www.youtube.com/embed/OYRkIGaP80M",
+      "sortOrder": 2,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_h_5",
-      "gardenid": "g_b5n8d2c1f",
-      "titleen": "Links, Images & Multimedia",
-      "titlear": "الروابط والصور والوسائط المتعددة",
-      "titletr": "Bağlantılar, Görseller ve Multimedya",
       "duration": "20:10",
-      "videourl": "https://www.youtube.com/embed/gOioxltfh48",
       "status": "bloomed",
       "section": "HTML Fundamentals",
-      "sortorder": 5,
       "tags": [
         "HTML",
         "Links",
         "Images"
-      ]
+      ],
+      "titleEn": "Links, Images & Multimedia",
+      "titleAr": "الروابط والصور والوسائط المتعددة",
+      "titleTr": "Bağlantılar, Görseller ve Multimedya",
+      "videoUrl": "https://www.youtube.com/embed/gOioxltfh48",
+      "sortOrder": 5,
+      "gardenId": "g_b5n8d2c1f"
     },
     {
       "id": "s_m_20",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Course Wrap-Up & Marketing Career Path",
-      "titlear": "ختام الدورة والمسار المهني في التسويق",
-      "titletr": "Kurs Özeti ve Pazarlama Kariyer Yolu",
       "duration": "11:30",
-      "videourl": "https://www.youtube.com/embed/DUAxT7RNGZ4",
       "status": "bloomed",
       "section": "Campaign Projects",
-      "sortorder": 20,
       "tags": [
         "Wrap-Up",
         "Career"
-      ]
+      ],
+      "titleEn": "Course Wrap-Up & Marketing Career Path",
+      "titleAr": "ختام الدورة والمسار المهني في التسويق",
+      "titleTr": "Kurs Özeti ve Pazarlama Kariyer Yolu",
+      "videoUrl": "https://www.youtube.com/embed/DUAxT7RNGZ4",
+      "sortOrder": 20,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_m_17",
-      "gardenid": "g_h4r7t9w1q",
-      "titleen": "Influencer Marketing Strategies",
-      "titlear": "استراتيجيات التسويق عبر المؤثرين",
-      "titletr": "Influencer Pazarlama Stratejileri",
       "duration": "13:40",
-      "videourl": "https://www.youtube.com/embed/g-UuWvyOb1w",
       "status": "bloomed",
       "section": "Brand & Strategy",
-      "sortorder": 17,
       "tags": [
         "Influencer",
         "Marketing"
-      ]
+      ],
+      "titleEn": "Influencer Marketing Strategies",
+      "titleAr": "استراتيجيات التسويق عبر المؤثرين",
+      "titleTr": "Influencer Pazarlama Stratejileri",
+      "videoUrl": "https://www.youtube.com/embed/g-UuWvyOb1w",
+      "sortOrder": 17,
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "s_e_1",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Why Learn English? Mindset & Goals",
-      "titlear": "لماذا نتعلم الإنجليزية؟ العقلية والأهداف",
-      "titletr": "Neden İngilizce Öğrenmeli? Zihniyet ve Hedefler",
       "duration": "12:00",
-      "videourl": "https://www.youtube.com/embed/QxQUapA-2w4",
       "status": "bloomed",
       "section": "Foundations",
-      "sortorder": 1,
       "tags": [
         "Introduction",
         "Goals"
-      ]
+      ],
+      "titleEn": "Why Learn English? Mindset & Goals",
+      "titleAr": "لماذا نتعلم الإنجليزية؟ العقلية والأهداف",
+      "titleTr": "Neden İngilizce Öğrenmeli? Zihniyet ve Hedefler",
+      "videoUrl": "https://www.youtube.com/embed/QxQUapA-2w4",
+      "sortOrder": 1,
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "s_e_14",
-      "gardenid": "g_k7m3x9p2r",
-      "titleen": "Writing Emails & Messages",
-      "titlear": "كتابة البريد الإلكتروني والرسائل",
-      "titletr": "E-posta ve Mesaj Yazma",
       "duration": "16:25",
-      "videourl": "https://www.youtube.com/embed/_Mv7fBqauvc",
       "status": "bloomed",
       "section": "Reading & Writing",
-      "sortorder": 14,
       "tags": [
         "Writing",
         "Email"
-      ]
+      ],
+      "titleEn": "Writing Emails & Messages",
+      "titleAr": "كتابة البريد الإلكتروني والرسائل",
+      "titleTr": "E-posta ve Mesaj Yazma",
+      "videoUrl": "https://www.youtube.com/embed/_Mv7fBqauvc",
+      "sortOrder": 14,
+      "gardenId": "g_k7m3x9p2r"
     }
   ],
   "payments": [
@@ -1053,40 +1300,40 @@
       "id": "TXN_EG_PX6B4PDFV",
       "userid": "u_0xosos8w3",
       "useremail": "mazeneika2009@gmail.com",
-      "gardenid": "g_h4r7t9w1q",
       "currency": "EGP",
       "amount": 550,
       "gateway": "instapay",
       "paymentmethod": "InstaPay",
       "screenshot": null,
       "status": "approved",
-      "timestamp": "2026-06-22T01:09:21.000Z"
+      "timestamp": "2026-06-22T01:09:21.000Z",
+      "gardenId": "g_h4r7t9w1q"
     },
     {
       "id": "TXN_EG_CGIO7ICI2",
       "userid": "u_0xosos8w3",
       "useremail": "mazeneika2009@gmail.com",
-      "gardenid": "g_k7m3x9p2r",
       "currency": "EGP",
       "amount": 500,
       "gateway": "instapay",
       "paymentmethod": "InstaPay",
       "screenshot": null,
       "status": "approved",
-      "timestamp": "2026-06-22T01:23:02.000Z"
+      "timestamp": "2026-06-22T01:23:02.000Z",
+      "gardenId": "g_k7m3x9p2r"
     },
     {
       "id": "TXN_EG_F6R89KRI7",
       "userid": "u_0xosos8w3",
       "useremail": "mazeneika2009@gmail.com",
-      "gardenid": "g_b5n8d2c1f",
       "currency": "EGP",
       "amount": 600,
       "gateway": "instapay",
       "paymentmethod": "InstaPay",
       "screenshot": null,
       "status": "approved",
-      "timestamp": "2026-06-22T01:35:00.000Z"
+      "timestamp": "2026-06-22T01:35:00.000Z",
+      "gardenId": "g_b5n8d2c1f"
     }
   ],
   "student_growth": [],
@@ -1095,489 +1342,489 @@
   "quiz_questions": [
     {
       "id": "qq_h_3",
-      "seedid": "s_h_3",
       "timestamp": 1782587189,
       "questionen": "What is the correct HTML element for inserting a line break?",
       "questionar": "ما هو عنصر HTML الصحيح لإدراج فاصل أسطر؟",
       "questiontr": "Satır sonu eklemek için doğru HTML öğesi hangisidir?",
-      "optionsen": [
+      "seedId": "s_h_3",
+      "correctIndex": 2,
+      "optionsEn": [
         "<break>",
         "<lb>",
         "<br>",
         "<newline>"
       ],
-      "optionsar": [
+      "optionsAr": [
         "<break>",
         "<lb>",
         "<br>",
         "<newline>"
       ],
-      "optionstr": [
+      "optionsTr": [
         "<break>",
         "<lb>",
         "<br>",
         "<newline>"
-      ],
-      "correctindex": 2
+      ]
     },
     {
       "id": "qq_h_4",
-      "seedid": "s_h_5",
       "timestamp": 1782587189,
       "questionen": "Which attribute is used to specify the URL of an image?",
       "questionar": "ما هي السمة المستخدمة لتحديد عنوان URL للصورة؟",
       "questiontr": "Bir görselin URL'sini belirtmek için hangi özellik kullanılır?",
-      "optionsen": [
+      "seedId": "s_h_5",
+      "correctIndex": 1,
+      "optionsEn": [
         "href",
         "src",
         "link",
         "url"
       ],
-      "optionsar": [
+      "optionsAr": [
         "href",
         "src",
         "link",
         "url"
       ],
-      "optionstr": [
+      "optionsTr": [
         "href",
         "src",
         "link",
         "url"
-      ],
-      "correctindex": 1
+      ]
     },
     {
       "id": "qq_h_5",
-      "seedid": "s_h_8",
       "timestamp": 1782587189,
       "questionen": "Which input type creates a password field?",
       "questionar": "أي نوع إدخال ينشئ حقل كلمة مرور؟",
       "questiontr": "Hangi girdi türü bir parola alanı oluşturur?",
-      "optionsen": [
+      "seedId": "s_h_8",
+      "correctIndex": 1,
+      "optionsEn": [
         "<input type=\"text\">",
         "<input type=\"password\">",
         "<input type=\"secret\">",
         "<input type=\"hidden\">"
       ],
-      "optionsar": [
+      "optionsAr": [
         "نص",
         "كلمة مرور",
         "سري",
         "مخفي"
       ],
-      "optionstr": [
+      "optionsTr": [
         "metin",
         "parola",
         "gizli",
         "gizlenmiş"
-      ],
-      "correctindex": 1
+      ]
     },
     {
       "id": "qq_h_6",
-      "seedid": "s_h_15",
       "timestamp": 1782587189,
       "questionen": "What is the purpose of a landing page?",
       "questionar": "ما هو الغرض من صفحة الهبوط؟",
       "questiontr": "Açılış sayfasının amacı nedir?",
-      "optionsen": [
+      "seedId": "s_h_15",
+      "correctIndex": 1,
+      "optionsEn": [
         "To show all products",
         "To capture leads or conversions",
         "To display contact info",
         "To load the homepage"
       ],
-      "optionsar": [
+      "optionsAr": [
         "عرض جميع المنتجات",
         "جمع العملاء المحتملين أو التحويلات",
         "عرض معلومات الاتصال",
         "تحميل الصفحة الرئيسية"
       ],
-      "optionstr": [
+      "optionsTr": [
         "Tüm ürünleri göstermek",
         "Potansiyel müşteri veya dönüşüm toplamak",
         "İletişim bilgilerini göstermek",
         "Ana sayfayı yüklemek"
-      ],
-      "correctindex": 1
+      ]
     },
     {
       "id": "qq_m_1",
-      "seedid": "s_m_1",
       "timestamp": 1782587189,
       "questionen": "What is digital marketing?",
       "questionar": "ما هو التسويق الرقمي؟",
       "questiontr": "Dijital pazarlama nedir?",
-      "optionsen": [
+      "seedId": "s_m_1",
+      "correctIndex": 0,
+      "optionsEn": [
         "Marketing using digital channels",
         "Marketing only on TV",
         "Print advertising",
         "Billboard advertising"
       ],
-      "optionsar": [
+      "optionsAr": [
         "التسويق باستخدام القنوات الرقمية",
         "التسويق فقط على التلفزيون",
         "الإعلانات المطبوعة",
         "الإعلانات على اللوحات الإعلانية"
       ],
-      "optionstr": [
+      "optionsTr": [
         "Dijital kanalları kullanarak pazarlama",
         "Sadece TV'de pazarlama",
         "Basılı reklamcılık",
         "Reklam panosu reklamcılığı"
-      ],
-      "correctindex": 0
+      ]
     },
     {
       "id": "qq_m_2",
-      "seedid": "s_m_2",
       "timestamp": 1782587189,
       "questionen": "What does SEO stand for?",
       "questionar": "ماذا تعني SEO؟",
       "questiontr": "SEO ne anlama gelir?",
-      "optionsen": [
+      "seedId": "s_m_2",
+      "correctIndex": 0,
+      "optionsEn": [
         "Search Engine Optimization",
         "Social Engagement Online",
         "Site Evaluation Output",
         "Systematic Entry Overview"
       ],
-      "optionsar": [
+      "optionsAr": [
         "تحسين محرك البحث",
         "المشاركة الاجتماعية عبر الإنترنت",
         "مخرجات تقييم الموقع",
         "نظرة عامة على الإدخال المنهجي"
       ],
-      "optionstr": [
+      "optionsTr": [
         "Arama Motoru Optimizasyonu",
         "Çevrimiçi Sosyal Etkileşim",
         "Site Değerlendirme Çıktısı",
         "Sistematik Giriş Genel Bakış"
-      ],
-      "correctindex": 0
+      ]
     },
     {
       "id": "qq_m_3",
-      "seedid": "s_m_7",
       "timestamp": 1782587189,
       "questionen": "Which platform has the largest user base for social media marketing?",
       "questionar": "أي منصة لديها أكبر قاعدة مستخدمين للتسويق عبر وسائل التواصل الاجتماعي؟",
       "questiontr": "Sosyal medya pazarlaması için en büyük kullanıcı tabanına hangi platform sahiptir?",
-      "optionsen": [
+      "seedId": "s_m_7",
+      "correctIndex": 2,
+      "optionsEn": [
         "Twitter",
         "LinkedIn",
         "Facebook",
         "Pinterest"
       ],
-      "optionsar": [
+      "optionsAr": [
         "تويتر",
         "لينكد إن",
         "فيسبوك",
         "بينتريست"
       ],
-      "optionstr": [
+      "optionsTr": [
         "Twitter",
         "LinkedIn",
         "Facebook",
         "Pinterest"
-      ],
-      "correctindex": 2
+      ]
     },
     {
       "id": "qq_m_4",
-      "seedid": "s_m_13",
       "timestamp": 1782587189,
       "questionen": "What is a KPI in marketing?",
       "questionar": "ما هو KPI في التسويق؟",
       "questiontr": "Pazarlamada KPI nedir?",
-      "optionsen": [
+      "seedId": "s_m_13",
+      "correctIndex": 0,
+      "optionsEn": [
         "Key Performance Indicator",
         "Known Product Index",
         "Key Planning Initiative",
         "Knowledge Process Integration"
       ],
-      "optionsar": [
+      "optionsAr": [
         "مؤشر الأداء الرئيسي",
         "مؤشر المنتج المعروف",
         "مبادرة التخطيط الرئيسية",
         "تكامل عملية المعرفة"
       ],
-      "optionstr": [
+      "optionsTr": [
         "Anahtar Performans Göstergesi",
         "Bilinen Ürün Endeksi",
         "Anahtar Planlama Girişimi",
         "Bilgi Süreci Entegrasyonu"
-      ],
-      "correctindex": 0
+      ]
     },
     {
       "id": "qq_m_5",
-      "seedid": "s_m_14",
       "timestamp": 1782587189,
       "questionen": "What is A/B testing?",
       "questionar": "ما هو اختبار A/B؟",
       "questiontr": "A/B testi nedir?",
-      "optionsen": [
+      "seedId": "s_m_14",
+      "correctIndex": 0,
+      "optionsEn": [
         "Testing two versions to compare performance",
         "Testing one version multiple times",
         "Testing with group A only",
         "Testing with group B only"
       ],
-      "optionsar": [
+      "optionsAr": [
         "اختبار نسختين لمقارنة الأداء",
         "اختبار نسخة واحدة عدة مرات",
         "الاختبار مع المجموعة أ فقط",
         "الاختبار مع المجموعة ب فقط"
       ],
-      "optionstr": [
+      "optionsTr": [
         "Performansı karşılaştırmak için iki sürümü test etme",
         "Bir sürümü birden çok kez test etme",
         "Sadece A grubuyla test etme",
         "Sadece B grubuyla test etme"
-      ],
-      "correctindex": 0
+      ]
     },
     {
       "id": "qq_m_6",
-      "seedid": "s_m_19",
       "timestamp": 1782587189,
       "questionen": "What is the first step in building a marketing campaign?",
       "questionar": "ما هي الخطوة الأولى في بناء حملة تسويقية؟",
       "questiontr": "Bir pazarlama kampanyası oluşturmanın ilk adımı nedir?",
-      "optionsen": [
+      "seedId": "s_m_19",
+      "correctIndex": 1,
+      "optionsEn": [
         "Creating ads",
         "Defining goals and target audience",
         "Setting a budget",
         "Measuring results"
       ],
-      "optionsar": [
+      "optionsAr": [
         "إنشاء الإعلانات",
         "تحديد الأهداف والجمهور المستهدف",
         "تحديد الميزانية",
         "قياس النتائج"
       ],
-      "optionstr": [
+      "optionsTr": [
         "Reklam oluşturma",
         "Hedefleri ve hedef kitleyi tanımlama",
         "Bütçe belirleme",
         "Sonuçları ölçme"
-      ],
-      "correctindex": 1
+      ]
     },
     {
       "id": "qq_e_1",
-      "seedid": "s_e_1",
       "timestamp": 1782587189,
       "questionen": "What is the best way to learn English?",
       "questionar": "ما هي أفضل طريقة لتعلم الإنجليزية؟",
       "questiontr": "İngilizce öğrenmenin en iyi yolu nedir?",
-      "optionsen": [
+      "seedId": "s_e_1",
+      "correctIndex": 1,
+      "optionsEn": [
         "Only grammar books",
         "Regular practice with real content",
         "Watching movies without subtitles",
         "Memorizing the dictionary"
       ],
-      "optionsar": [
+      "optionsAr": [
         "كتب القواعد فقط",
         "الممارسة المنتظمة مع محتوى حقيقي",
         "مشاهدة الأفلام بدون ترجمة",
         "حفظ القاموس"
       ],
-      "optionstr": [
+      "optionsTr": [
         "Sadece dilbilgisi kitapları",
         "Gerçek içerikle düzenli pratik",
         "Altyazısız film izlemek",
         "Sözlüğü ezberlemek"
-      ],
-      "correctindex": 1
+      ]
     },
     {
       "id": "qq_e_2",
-      "seedid": "s_e_4",
       "timestamp": 1782587189,
       "questionen": "How do you say \"2026\" in English?",
       "questionar": "كيف تقول \"2026\" بالإنجليزية؟",
       "questiontr": "İngilizce \"2026\" nasıl söylenir?",
-      "optionsen": [
+      "seedId": "s_e_4",
+      "correctIndex": 1,
+      "optionsEn": [
         "Two thousand twenty-six",
         "Twenty twenty-six",
         "Two zero two six",
         "Two thousand and twenty-six"
       ],
-      "optionsar": [
+      "optionsAr": [
         "ألفان وستة وعشرون",
         "عشرون وستة وعشرون",
         "اثنان صفر اثنان ستة",
         "ألفان وستة وعشرون"
       ],
-      "optionstr": [
+      "optionsTr": [
         "İki bin yirmi altı",
         "Yirmi yirmi altı",
         "İki sıfır iki altı",
         "İki bin ve yirmi altı"
-      ],
-      "correctindex": 1
+      ]
     },
     {
       "id": "qq_e_3",
-      "seedid": "s_e_7",
       "timestamp": 1782587189,
       "questionen": "\"She ___ to school every day.\" Choose the correct verb form.",
       "questionar": "\"هي ___ إلى المدرسة كل يوم.\" اختر صيغة الفعل الصحيحة.",
       "questiontr": "\"O her gün okula ___.\" Doğru fiil formunu seçin.",
-      "optionsen": [
+      "seedId": "s_e_7",
+      "correctIndex": 1,
+      "optionsEn": [
         "go",
         "goes",
         "going",
         "went"
       ],
-      "optionsar": [
+      "optionsAr": [
         "تذهب",
         "تذهب",
         "ذاهبة",
         "ذهبت"
       ],
-      "optionstr": [
+      "optionsTr": [
         "gider",
         "gider",
         "gidiyor",
         "gitti"
-      ],
-      "correctindex": 1
+      ]
     },
     {
       "id": "qq_h_2",
-      "seedid": "s_h_1",
       "timestamp": 1782587189,
       "questionen": "Which tag is used for the largest heading?",
       "questionar": "ما هي العلامة المستخدمة لأكبر عنوان؟",
       "questiontr": "En büyük başlık için hangi etiket kullanılır?",
-      "optionsen": [
+      "seedId": "s_h_1",
+      "correctIndex": 2,
+      "optionsEn": [
         "<h6>",
         "<heading>",
         "<h1>",
         "<head>"
       ],
-      "optionsar": [
+      "optionsAr": [
         "<h6>",
         "<heading>",
         "<h1>",
         "<head>"
       ],
-      "optionstr": [
+      "optionsTr": [
         "<h6>",
         "<heading>",
         "<h1>",
         "<head>"
-      ],
-      "correctindex": 2
+      ]
     },
     {
       "id": "qq_h_1",
-      "seedid": "s_h_1",
       "timestamp": 1782587189,
       "questionen": "What does HTML stand for?",
       "questionar": "ماذا تعني HTML؟",
       "questiontr": "HTML ne anlama gelir?",
-      "optionsen": [
+      "seedId": "s_h_1",
+      "correctIndex": 0,
+      "optionsEn": [
         "HyperText Markup Language",
         "HighText Machine Language",
         "HyperTool Markup Language",
         "HomeTool Markup Language"
       ],
-      "optionsar": [
+      "optionsAr": [
         "لغة ترميز النص التشعبي",
         "لغة آلة النص العالي",
         "لغة ترميز الأدوات",
         "لغة ترميز المنزل"
       ],
-      "optionstr": [
+      "optionsTr": [
         "Köprü Metni İşaretleme Dili",
         "Yüksek Metin Makine Dili",
         "Araç İşaretleme Dili",
         "Ev Aracı İşaretleme Dili"
-      ],
-      "correctindex": 0
+      ]
     },
     {
       "id": "qq_e_4",
-      "seedid": "s_e_10",
       "timestamp": 1782587189,
       "questionen": "What is shadowing in language learning?",
       "questionar": "ما هي تقنية التظليل في تعلم اللغة؟",
       "questiontr": "Dil öğreniminde gölgeleme nedir?",
-      "optionsen": [
+      "seedId": "s_e_10",
+      "correctIndex": 0,
+      "optionsEn": [
         "Following a speaker and repeating immediately",
         "Reading a transcript silently",
         "Writing what you hear",
         "Translating word by word"
       ],
-      "optionsar": [
+      "optionsAr": [
         "متابعة المتحدث والتكرار فوراً",
         "قراءة النص بصمت",
         "كتابة ما تسمع",
         "الترجمة كلمة بكلمة"
       ],
-      "optionstr": [
+      "optionsTr": [
         "Bir konuşmacıyı takip edip hemen tekrar etme",
         "Bir metni sessizce okuma",
         "Duyduğunu yazma",
         "Kelime kelime çevirme"
-      ],
-      "correctindex": 0
+      ]
     },
     {
       "id": "qq_e_5",
-      "seedid": "s_e_16",
       "timestamp": 1782587189,
       "questionen": "What does \"break down\" mean?",
       "questionar": "ماذا تعني \"break down\"؟",
       "questiontr": "\"Break down\" ne anlama gelir?",
-      "optionsen": [
+      "seedId": "s_e_16",
+      "correctIndex": 3,
+      "optionsEn": [
         "To stop working",
         "To destroy",
         "To analyze in detail",
         "All of the above"
       ],
-      "optionsar": [
+      "optionsAr": [
         "التوقف عن العمل",
         "تدمير",
         "تحليل بالتفصيل",
         "كل ما سبق"
       ],
-      "optionstr": [
+      "optionsTr": [
         "Çalışmayı durdurmak",
         "Yok etmek",
         "Detaylı analiz etmek",
         "Hepsi"
-      ],
-      "correctindex": 3
+      ]
     },
     {
       "id": "qq_e_6",
-      "seedid": "s_e_18",
       "timestamp": 1782587189,
       "questionen": "What is a common phrase used in business meetings to start a discussion?",
       "questionar": "ما هي العبارة الشائعة المستخدمة في اجتماعات العمل لبدء المناقشة؟",
       "questiontr": "İş toplantılarında tartışmayı başlatmak için kullanılan yaygın bir ifade nedir?",
-      "optionsen": [
+      "seedId": "s_e_18",
+      "correctIndex": 1,
+      "optionsEn": [
         "Let's call it a day",
         "Let's get down to business",
         "See you later",
         "Take care"
       ],
-      "optionsar": [
+      "optionsAr": [
         "لننهي اليوم",
         "لنبدأ العمل",
         "أراك لاحقاً",
         "اعتن بنفسك"
       ],
-      "optionstr": [
+      "optionsTr": [
         "Günü bitirelim",
         "Hadi işe koyulalım",
         "Sonra görüşürüz",
         "Kendine iyi bak"
-      ],
-      "correctindex": 1
+      ]
     }
   ],
   "quiz_answers": [],
@@ -1667,6 +1914,15 @@
       "message": "saasxsax",
       "status": "unread",
       "createdAt": "2026-06-28 09:04:27"
+    },
+    {
+      "id": "c_hay2cocpk",
+      "name": "sass",
+      "email": "mazeneika@sxxx",
+      "subject": "sass",
+      "message": "sass",
+      "status": "unread",
+      "createdAt": "2026-06-28 09:45:44"
     }
   ]
 }

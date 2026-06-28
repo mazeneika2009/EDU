@@ -556,7 +556,7 @@ function AppContent() {
   }, [gardenProgress, currentUser, selectedGarden, lang]);
 
   useEffect(() => {
-    if (!isAuthChecking && (screen === 'classroom' || screen === 'profile') && !currentUser) {
+    if (!isAuthChecking && (screen === 'classroom' || screen === 'profile' || screen === 'gardens' || screen === 'admin') && !currentUser) {
       navigate('/login');
     }
   }, [screen, currentUser, navigate, isAuthChecking]);

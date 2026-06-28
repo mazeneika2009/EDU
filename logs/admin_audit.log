@@ -20,3 +20,8 @@
 [2026-06-26T05:03:33.813Z] ACTION: CMS_GARDEN_UPDATE | DETAILS: {"id":"g_h4r7t9w1q","titleEn":"Marketing with Real Videos","category":"Marketing"}
 [2026-06-26T05:03:43.921Z] ACTION: CMS_GARDEN_UPDATE | DETAILS: {"id":"g_k7m3x9p2r","titleEn":"English with Real Videos","category":"Languages"}
 [2026-06-26T05:18:32.616Z] ACTION: PAYMENT_APPROVE | DETAILS: {"transactionId":"TXN_EG_BNQUDZCTV","userId":"u_d768b8j6j","gardenId":"g_h4r7t9w1q"}
+[2026-06-27T20:34:18.355Z] ACTION: CMS_GARDEN_UPDATE | DETAILS: {"id":"g_b5n8d2c1f","titleEn":"Programming HTML with Real Videos","category":"Programming"}
+[2026-06-27T20:34:34.694Z] ACTION: CMS_SEED_UPDATE | DETAILS: {"id":"s_h_1","gardenId":"g_b5n8d2c1f","titleEn":"Introduction to HTML & Web Basics"}
+[2026-06-27T20:35:10.153Z] ACTION: PAYMENT_APPROVE | DETAILS: {"transactionId":"TXN_EG_MDCLGMB3W","userId":"u_d768b8j6j","gardenId":"g_k7m3x9p2r"}
+[2026-06-27T20:43:36.858Z] ACTION: QUERY_ANSWERED | DETAILS: {"queryId":"q_zm0z5xdq4"}
+[2026-06-27T20:43:49.058Z] ACTION: QUERY_ANSWERED | DETAILS: {"queryId":"q_i73vkpw3w"}

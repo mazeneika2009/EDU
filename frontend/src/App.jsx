@@ -34,7 +34,86 @@ function SelectDropdown({ options, value, onChange, className }) {
     </div>
   );
 }
-import { localization } from './types.js';
+
+function ContactForm({ t }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFeedback(null);
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setFeedback({ type: 'error', text: t.contact_required });
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name.trim(), email: email.trim(), subject: subject.trim(), message: message.trim() }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setFeedback({ type: 'success', text: t.contact_success });
+        setName(''); setEmail(''); setSubject(''); setMessage('');
+      } else {
+        setFeedback({ type: 'error', text: data.error || t.contact_error });
+      }
+    } catch {
+      setFeedback({ type: 'error', text: t.contact_error });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const inputClass = 'w-full bg-[#0c101d] border border-purple-500/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 font-mono outline-none focus:border-cyan-500/40 transition-colors';
+
+  return (
+    <form onSubmit={handleSubmit} className="glass-panel rounded-2xl p-6 md:p-8 space-y-5">
+      <div className="grid md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider mb-1.5">{t.contact_name}</label>
+          <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder={t.contact_name_placeholder} className={inputClass} disabled={loading} />
+        </div>
+        <div>
+          <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider mb-1.5">{t.contact_email}</label>
+          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder={t.contact_email_placeholder} className={inputClass} disabled={loading} />
+        </div>
+      </div>
+      <div>
+        <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider mb-1.5">{t.contact_subject}</label>
+        <input type="text" value={subject} onChange={e => setSubject(e.target.value)} placeholder={t.contact_subject_placeholder} className={inputClass} disabled={loading} />
+      </div>
+      <div>
+        <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider mb-1.5">{t.contact_message}</label>
+        <textarea value={message} onChange={e => setMessage(e.target.value)} placeholder={t.contact_message_placeholder} rows={5} className={inputClass + ' resize-none'} disabled={loading} />
+      </div>
+
+      {feedback && (
+        <div className={`text-[11px] font-mono px-4 py-2 rounded-xl ${feedback.type === 'success' ? 'bg-green-950/40 border border-green-500/30 text-green-400' : 'bg-red-950/40 border border-red-500/30 text-red-400'}`}>
+          {feedback.text}
+        </div>
+      )}
+
+      <button type="submit" disabled={loading}
+        className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-extrabold text-sm shadow-lg shadow-purple-500/20 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2"
+      >
+        {loading ? (
+          <span className="flex items-center gap-2"><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> {t.contact_sending}</span>
+        ) : (
+          <span className="flex items-center gap-2"><Send size={15} /> {t.contact_submit}</span>
+        )}
+      </button>
+    </form>
+  );
+}
+
+import { localization, createTranslator } from './types.js';
 import { LanguageSelector } from './components/LanguageSelector.jsx';
 import { SecureVideoPlayer } from './components/WatermarkPlayer.jsx';
 import { QueriesTab } from './components/QueriesTab.jsx';
@@ -50,7 +129,8 @@ import { BrowserRouter as Router, useNavigate, useLocation } from 'react-router-
 import {
   Sprout, Leaf, Compass, Shield, Milestone, Sparkles, UserCheck, Flame, BookOpen, KeyRound,
   Eye, EyeOff, Lock, User as UserIcon, LogOut, CheckCircle2, UserPlus, Info, Phone, Mail, Award, Clock,
-  Filter, ArrowLeft, BrainCircuit, ChevronRight, BarChart3
+  Filter, ArrowLeft, BrainCircuit, ChevronRight, BarChart3,
+  Target, Globe, GraduationCap, Bookmark, Send, MessageCircle
 } from 'lucide-react';
 
 export const getTagStyles = (tag) => {
@@ -182,6 +262,12 @@ function AppContent() {
   const autoReportShown = useRef(false);
 
   const [currentVideoTime, setCurrentVideoTime] = useState(0);
+
+  const [stats, setStats] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/stats').then(r => r.json()).then(setStats).catch(() => {});
+  }, []);
 
   useEffect(() => {
     currentVideoTimeRef.current = currentVideoTime;
@@ -956,7 +1042,7 @@ function AppContent() {
     fetchGardenProgress(selectedGarden.id);
   };
 
-  const t = localization[lang];
+  const t = createTranslator(lang);
 
   if (isAuthChecking) {
     return (
@@ -1152,7 +1238,7 @@ function AppContent() {
       <main className="w-full max-w-7xl px-4 mt-12 flex-1">
         
         {screen === 'landing' && (
-          <div id="available-gardens-section" className="space-y-8">
+          <><div id="available-gardens-section" className="space-y-8">
             {currentUser && currentUser.paidGardens && currentUser.paidGardens.length > 0 && (
               <div className="mb-8">
                 <div className="border-b border-cyan-500/10 pb-4 mb-4">
@@ -1323,7 +1409,154 @@ function AppContent() {
                 )}
               </div>
             </div>
-          )}
+
+            {/* About Section */}
+            <section className="pt-24 pb-12">
+              <div className="relative mb-12 text-center">
+                <div className="absolute inset-0 flex items-center justify-center -z-10">
+                  <div className="w-32 h-32 bg-purple-500/5 blur-[100px] rounded-full" />
+                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-950/40 border border-purple-500/30 rounded-full text-[10px] text-cyan-400 font-mono font-bold tracking-widest uppercase mb-4">
+                    <Info size={11} />
+                    <span>{t.about_title}</span>
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-black text-white font-headline mb-4">
+                    {t.about_title}
+                  </h3>
+                  <p className="max-w-3xl mx-auto text-sm md:text-base text-gray-400 leading-relaxed">
+                    {t.about_description}
+                  </p>
+                </motion.div>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+                {[
+                  { icon: UserCheck, value: stats ? `${stats.totalUsers}+` : '—', label: t.about_stat_students },
+                  { icon: BookOpen, value: stats ? String(stats.totalGardens) : '—', label: t.about_stat_courses },
+                  { icon: Globe, value: stats ? String(stats.totalCountries) : '—', label: t.about_stat_countries },
+                  { icon: GraduationCap, value: stats ? `${stats.totalSeeds}+` : '—', label: t.about_stat_lessons },
+                ].map((stat, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1, duration: 0.5 }}
+                    className="relative group"
+                  >
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-cyan-500 rounded-2xl opacity-0 group-hover:opacity-20 blur transition-all duration-500" />
+                    <div className="relative glass-panel rounded-2xl p-5 text-center">
+                      <stat.icon size={22} className="mx-auto mb-2 text-cyan-400" />
+                      <div className="text-2xl md:text-3xl font-black text-white font-headline">{stat.value}</div>
+                      <div className="text-[10px] text-gray-400 font-mono mt-1 uppercase tracking-wider">{stat.label}</div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Mission & Vision */}
+              <div className="grid md:grid-cols-2 gap-6 mb-16">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="glass-panel rounded-2xl p-6 md:p-8 relative overflow-hidden group"
+                >
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-cyan-500" />
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-purple-500/10 rounded-lg">
+                      <Target size={20} className="text-purple-400" />
+                    </div>
+                    <h4 className="text-lg font-extrabold text-white font-headline">{t.about_mission}</h4>
+                  </div>
+                  <p className="text-sm text-gray-400 leading-relaxed">{t.about_mission_desc}</p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="glass-panel rounded-2xl p-6 md:p-8 relative overflow-hidden group"
+                >
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-purple-500" />
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-cyan-500/10 rounded-lg">
+                      <Compass size={20} className="text-cyan-400" />
+                    </div>
+                    <h4 className="text-lg font-extrabold text-white font-headline">{t.about_vision}</h4>
+                  </div>
+                  <p className="text-sm text-gray-400 leading-relaxed">{t.about_vision_desc}</p>
+                </motion.div>
+              </div>
+
+              {/* Features */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {[
+                  { icon: BrainCircuit, title: t.about_feature_1_title, desc: t.about_feature_1_desc },
+                  { icon: Sparkles, title: t.about_feature_2_title, desc: t.about_feature_2_desc },
+                  { icon: Award, title: t.about_feature_3_title, desc: t.about_feature_3_desc },
+                  { icon: Bookmark, title: t.about_feature_4_title, desc: t.about_feature_4_desc },
+                ].map((feat, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1, duration: 0.5 }}
+                    className="glass-panel rounded-2xl p-5 group hover:border-purple-500/30 transition-all duration-300"
+                  >
+                    <div className="p-2.5 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 rounded-xl w-fit mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <feat.icon size={18} className="text-cyan-400" />
+                    </div>
+                    <h5 className="text-sm font-extrabold text-white mb-2 font-headline">{feat.title}</h5>
+                    <p className="text-[11px] text-gray-400 leading-relaxed">{feat.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+
+            {/* Contact Section */}
+            <section className="pt-24 pb-12">
+              <div className="relative mb-10 text-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-950/40 border border-purple-500/30 rounded-full text-[10px] text-cyan-400 font-mono font-bold tracking-widest uppercase mb-4">
+                    <MessageCircle size={11} />
+                    <span>{t.contact_title}</span>
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-black text-white font-headline mb-4">
+                    {t.contact_title}
+                  </h3>
+                  <p className="max-w-2xl mx-auto text-sm md:text-base text-gray-400 leading-relaxed">
+                    {t.contact_description}
+                  </p>
+                </motion.div>
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="max-w-2xl mx-auto"
+              >
+                <ContactForm t={t} />
+              </motion.div>
+            </section>
+          </>)}
           
           {screen === 'gardens' && (
           <div className="space-y-8">

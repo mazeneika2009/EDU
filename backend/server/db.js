@@ -1,4 +1,4 @@
-import mysql from 'mysql2/promise';
+import pg from 'pg';
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
@@ -7,18 +7,25 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
-export const pool = mysql.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  port: Number(process.env.DB_PORT) || 3306,
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'knowledge_garden',
-  waitForConnections: true,
-  connectionLimit: 100,
-  queueLimit: 200,
-  enableKeepAlive: true,
-  keepAliveInitialDelay: 10000,
+const rawPool = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+  max: 100,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 10000,
+  keepAlive: true,
 });
+
+const origQuery = rawPool.query.bind(rawPool);
+rawPool.query = (text, params) => {
+  if (params && params.length > 0) {
+    let i = 0;
+    text = text.replace(/\?/g, () => `$${++i}`);
+    params = params.map(p => typeof p === 'boolean' ? (p ? 1 : 0) : p);
+  }
+  return origQuery(text, params).then(result => [result.rows]);
+};
+
+export const pool = rawPool;
 
 let memoryDb = null;
 
@@ -56,7 +63,7 @@ async function loadAll() {
     pool.query('SELECT * FROM users'),
     pool.query('SELECT * FROM emails'),
     pool.query('SELECT * FROM gardens'),
-    pool.query('SELECT s.*, GROUP_CONCAT(st.tag) AS tags FROM seeds s LEFT JOIN seed_tags st ON st.seedId = s.id GROUP BY s.id'),
+    pool.query('SELECT s.*, STRING_AGG(st.tag, \',\') AS tags FROM seeds s LEFT JOIN seed_tags st ON st.seedId = s.id GROUP BY s.id'),
     pool.query('SELECT * FROM payments'),
     pool.query('SELECT * FROM student_growth'),
     pool.query('SELECT * FROM queries'),
@@ -105,24 +112,23 @@ function emptyDb() {
 }
 
 export async function initializeDB() {
-  console.log('[DB] Loading all data from MySQL...');
+  console.log('[DB] Loading all data from PostgreSQL...');
   try {
-    const fromMySql = await loadAll();
+    const fromDb = await loadAll();
     if (!loadFromCache()) {
-      memoryDb = fromMySql;
+      memoryDb = fromDb;
     } else {
-      // Merge: MySQL is source of truth for known tables, cache supplements extras
       for (const key of ['users', 'emails', 'gardens', 'seeds', 'payments',
         'student_growth', 'queries', 'otp_verifications',
         'quiz_questions', 'quiz_answers']) {
-        if (fromMySql[key]) memoryDb[key] = fromMySql[key];
+        if (fromDb[key]) memoryDb[key] = fromDb[key];
       }
     }
     console.log('[DB] Loaded', memoryDb.users.length, 'users,', memoryDb.gardens.length, 'gardens,',
       memoryDb.seeds.length, 'seeds,', memoryDb.quiz_questions.length, 'questions,',
       memoryDb.payments.length, 'payments');
   } catch (err) {
-    console.error('[DB] Failed to load from MySQL, using empty store:', err);
+    console.error('[DB] Failed to load from PostgreSQL, using empty store:', err);
     memoryDb = emptyDb();
   }
 }
@@ -174,27 +180,30 @@ export async function query(sql, params = []) {
 }
 
 export async function getUserById(id) {
-  const rows = await query('SELECT * FROM users WHERE id = ?', [id]);
+  const rows = await query('SELECT * FROM users WHERE id = $1', [id]);
   return rows[0] ?? null;
 }
 
 export async function createUser(user) {
-  await pool.execute(
-    `INSERT INTO users (id, email, phone, passwordHash, isVerified, verificationCode, createdAt, current_session_id, paidGardens)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-     ON DUPLICATE KEY UPDATE email=VALUES(email), phone=VALUES(phone), passwordHash=VALUES(passwordHash),
-       isVerified=VALUES(isVerified), verificationCode=VALUES(verificationCode), current_session_id=VALUES(current_session_id),
-       paidGardens=VALUES(paidGardens)`,
+  await pool.query(
+    `INSERT INTO users (id, email, phone, passwordHash, isVerified, verificationCode, createdAt, current_session_id, country, paidGardens)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+     ON CONFLICT (id) DO UPDATE SET
+       email=EXCLUDED.email, phone=EXCLUDED.phone, passwordHash=EXCLUDED.passwordHash,
+       isVerified=EXCLUDED.isVerified, verificationCode=EXCLUDED.verificationCode,
+       current_session_id=EXCLUDED.current_session_id,
+       country=EXCLUDED.country,
+       paidGardens=EXCLUDED.paidGardens`,
     [user.id, user.email, user.phone, user.passwordHash, user.isVerified ? 1 : 0,
      user.verificationCode || '', user.createdAt, user.current_session_id ?? null,
-     JSON.stringify(user.paidGardens || [])]
+     user.country || '', JSON.stringify(user.paidGardens || [])]
   );
 }
 
 export async function updateUserSession(userId, sessionId) {
-  await pool.execute('UPDATE users SET current_session_id = ? WHERE id = ?', [sessionId, userId]);
+  await pool.query('UPDATE users SET current_session_id = $1 WHERE id = $2', [sessionId, userId]);
 }
 
 export async function setPaymentStatus(paymentId, status) {
-  await pool.execute('UPDATE payments SET status = ? WHERE id = ?', [status, paymentId]);
+  await pool.query('UPDATE payments SET status = $1 WHERE id = $2', [status, paymentId]);
 }

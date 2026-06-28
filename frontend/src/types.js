@@ -343,6 +343,43 @@ export const localization = {
     otp_instruction: 'Open upper [Mock Inbox] envelope client to extract your security PIN.',
     certificate_issued: 'Official Certificate Issued!',
     view_report: 'View Growth Report & Certificate',
+
+    // About Section
+    about_title: 'About Knowledge Garden',
+    about_description: 'Knowledge Garden is a next-generation digital learning ecosystem that transforms software education through an immersive, gamified experience. We combine structured curricula with interactive video lessons, hands-on exercises, and AI-powered guidance to help learners grow from seedlings into confident technology professionals.',
+    about_mission: 'Our Mission',
+    about_mission_desc: 'To cultivate a new generation of tech professionals through an interactive, gamified learning experience that makes complex concepts accessible, engaging, and rewarding.',
+    about_vision: 'Our Vision',
+    about_vision_desc: 'A world where every aspiring developer has access to quality, hands-on education that grows with them — from their first line of code to mastering distributed systems and beyond.',
+    about_stat_students: 'Active Seekers',
+    about_stat_courses: 'Knowledge Gardens',
+    about_stat_countries: 'Countries',
+    about_stat_lessons: 'Video Lessons',
+    about_feature_1_title: 'Interactive Learning',
+    about_feature_1_desc: 'Learn by doing with hands-on exercises, real-world projects, and instant feedback that reinforce every concept.',
+    about_feature_2_title: 'Gamified Progress',
+    about_feature_2_desc: 'Watch your knowledge grow visually — plant seeds, bloom skills, and harvest expertise as you progress through each garden.',
+    about_feature_3_title: 'Expert Curriculum',
+    about_feature_3_desc: 'Content designed and reviewed by industry professionals, covering modern tech stacks, system design, and software architecture.',
+    about_feature_4_title: 'Flexible & Accessible',
+    about_feature_4_desc: 'Learn anytime, anywhere, on any device. Self-paced lessons fit your schedule without compromising on quality.',
+
+    // Contact Section
+    contact_title: 'Contact Us',
+    contact_description: 'Have a question, suggestion, or need support? Reach out to us and we\'ll get back to you as soon as possible.',
+    contact_name: 'Your Name',
+    contact_name_placeholder: 'e.g. John Doe',
+    contact_email: 'Your Email',
+    contact_email_placeholder: 'you@example.com',
+    contact_subject: 'Subject',
+    contact_subject_placeholder: 'How can we help you?',
+    contact_message: 'Message',
+    contact_message_placeholder: 'Write your message here...',
+    contact_submit: 'Send Message',
+    contact_sending: 'Sending...',
+    contact_success: 'Message sent successfully! We\'ll get back to you soon.',
+    contact_error: 'Failed to send message. Please try again.',
+    contact_required: 'Please fill in all required fields.',
   },
   ar: {
     dir: 'rtl',
@@ -688,6 +725,43 @@ export const localization = {
     otp_instruction: 'تفقد [صندوق الوارد] بالأعلى للحصول على الرمز.',
     certificate_issued: 'الشهادة الرسمية منقولة للبريد الإلكتروني!',
     view_report: 'استعراض الشهادة وتقرير النمو',
+
+    // About Section
+    about_title: 'عن حديقة المعرفة',
+    about_description: 'حديقة المعرفة هي نظام تعلم رقمي تفاعلي من الجيل الجديد يحول تعليم البرمجيات من خلال تجربة غامرة ومحفزة. نجمع بين المناهج المنظمة ودروس الفيديو التفاعلية والتمارين العملية والتوجيه بالذكاء الاصطناعي لمساعدة المتعلمين على النمو من بذور صغيرة إلى محترفي تكنولوجيا واثقين.',
+    about_mission: 'رسالتنا',
+    about_mission_desc: 'تنمية جيل جديد من محترفي التكنولوجيا من خلال تجربة تعلم تفاعلية قائمة على التحديات تجعل المفاهيم المعقدة سهلة المنال ومشوقة ومجزية.',
+    about_vision: 'رؤيتنا',
+    about_vision_desc: 'عالم يتاح فيه لكل مطور طموح تعليم عملي عالي الجودة ينمو معه — من أول سطر برمجة إلى إتقان الأنظمة الموزعة وما بعدها.',
+    about_stat_students: 'الباحثون النشطون',
+    about_stat_courses: 'الحدائق المعرفية',
+    about_stat_countries: 'الدول',
+    about_stat_lessons: 'الدروس المرئية',
+    about_feature_1_title: 'تعلم تفاعلي',
+    about_feature_1_desc: 'تعلم بالممارسة من خلال تمارين عملية ومشاريع واقعية وتغذية راجعة فورية تعزز كل مفهوم.',
+    about_feature_2_title: 'تقدم محفز',
+    about_feature_2_desc: 'شاهد معرفتك تنمو بصرياً — ازرع البذور، أزهر المهارات، واحصد الخبرات مع تقدمك في كل حديقة.',
+    about_feature_3_title: 'منهج خبراء',
+    about_feature_3_desc: 'محتوى مصمم ومراجع من قبل محترفي الصناعة، يغطي أحدث التقنيات وتصميم الأنظمة وهندسة البرمجيات.',
+    about_feature_4_title: 'مرن ومتاح',
+    about_feature_4_desc: 'تعلم في أي وقت، من أي مكان، على أي جهاز. دروس ذاتية تناسب جدولك دون المساس بالجودة.',
+
+    // Contact Section
+    contact_title: 'اتصل بنا',
+    contact_description: 'هل لديك سؤال أو اقتراح أو تحتاج إلى دعم؟ تواصل معنا وسنعود إليك في أقرب وقت ممكن.',
+    contact_name: 'الاسم',
+    contact_name_placeholder: 'مثلاً: أحمد علي',
+    contact_email: 'البريد الإلكتروني',
+    contact_email_placeholder: 'you@example.com',
+    contact_subject: 'الموضوع',
+    contact_subject_placeholder: 'كيف يمكننا مساعدتك؟',
+    contact_message: 'الرسالة',
+    contact_message_placeholder: 'اكتب رسالتك هنا...',
+    contact_submit: 'إرسال الرسالة',
+    contact_sending: 'جاري الإرسال...',
+    contact_success: 'تم إرسال الرسالة بنجاح! سنعود إليك قريباً.',
+    contact_error: 'فشل إرسال الرسالة. حاول مرة أخرى.',
+    contact_required: 'يرجى ملء جميع الحقول المطلوبة.',
   },
   tr: {
     dir: 'ltr',
@@ -1033,5 +1107,62 @@ export const localization = {
     otp_instruction: 'Şifreyi bulmak için yukarıdaki [Gelen Kutusu] simgesine tıklayın.',
     certificate_issued: 'Sertifikanız E-postaya Gönderildi!',
     view_report: 'Sertifika ve Raporu Görüntüle',
+
+    // About Section
+    about_title: 'Bilgi Bahçesi Hakkında',
+    about_description: 'Bilgi Bahçesi, yazılım eğitimini sürükleyici ve oyunlaştırılmış bir deneyime dönüştüren yeni nesil bir dijital öğrenme ekosistemidir. Yapılandırılmış müfredatı, etkileşimli video dersleri, uygulamalı alıştırmaları ve yapay zeka destekli rehberliği birleştirerek öğrencilerin küçük tohumlardan kendine güvenen teknoloji profesyonellerine dönüşmesine yardımcı oluyoruz.',
+    about_mission: 'Misyonumuz',
+    about_mission_desc: 'Karmaşık kavramları erişilebilir, ilgi çekici ve ödüllendirici hale getiren etkileşimli, oyunlaştırılmış bir öğrenme deneyimiyle yeni nesil teknoloji profesyonelleri yetiştirmek.',
+    about_vision: 'Vizyonumuz',
+    about_vision_desc: 'Her hevesli geliştiricinin ilk kod satırından dağıtık sistemlere ve ötesine kadar kendisiyle birlikte büyüyen kaliteli, uygulamalı eğitime erişebildiği bir dünya.',
+    about_stat_students: 'Aktif Arayıcılar',
+    about_stat_courses: 'Bilgi Bahçeleri',
+    about_stat_countries: 'Ülkeler',
+    about_stat_lessons: 'Video Dersleri',
+    about_feature_1_title: 'Etkileşimli Öğrenme',
+    about_feature_1_desc: 'Her konsepti pekiştiren uygulamalı alıştırmalar, gerçek dünya projeleri ve anında geri bildirimle yaparak öğrenin.',
+    about_feature_2_title: 'Oyunlaştırılmış İlerleme',
+    about_feature_2_desc: 'Bilginizin görsel olarak büyümesini izleyin — her bahçede ilerledikçe tohumlar ekin, becerileri çiçeklendirin ve uzmanlığı hasat edin.',
+    about_feature_3_title: 'Uzman Müfredatı',
+    about_feature_3_desc: 'Sektör profesyonelleri tarafından tasarlanmış ve incelenmiş içerik, modern teknoloji yığınlarını, sistem tasarımını ve yazılım mimarisini kapsar.',
+    about_feature_4_title: 'Esnek ve Erişilebilir',
+    about_feature_4_desc: 'Her zaman, her yerde, her cihazda öğrenin. Kendi hızınızda ilerleyen dersler, kaliteden ödün vermeden programınıza uyar.',
+
+    // Contact Section
+    contact_title: 'Bize Ulaşın',
+    contact_description: 'Sorunuz, öneriniz veya desteğe mi ihtiyacınız var? Bize ulaşın, en kısa sürede size dönüş yapalım.',
+    contact_name: 'Adınız',
+    contact_name_placeholder: 'Örn: Ahmet Yılmaz',
+    contact_email: 'E-posta Adresiniz',
+    contact_email_placeholder: 'you@example.com',
+    contact_subject: 'Konu',
+    contact_subject_placeholder: 'Size nasıl yardımcı olabiliriz?',
+    contact_message: 'Mesaj',
+    contact_message_placeholder: 'Mesajınızı buraya yazın...',
+    contact_submit: 'Mesaj Gönder',
+    contact_sending: 'Gönderiliyor...',
+    contact_success: 'Mesaj başarıyla gönderildi! En kısa sürede size dönüş yapacağız.',
+    contact_error: 'Mesaj gönderilemedi. Lütfen tekrar deneyin.',
+    contact_required: 'Lütfen gerekli tüm alanları doldurun.',
   }
 };
+
+const _cache = {};
+
+export function createTranslator(lang) {
+  if (_cache[lang]) return _cache[lang];
+  const fallback = localization.en || {};
+
+  const t = new Proxy({}, {
+    get(_, key) {
+      if (typeof key !== 'string') return undefined;
+      const langData = localization[lang];
+      if (langData && key in langData) return langData[key];
+      if (key in fallback) return fallback[key];
+      return key;
+    }
+  });
+
+  _cache[lang] = t;
+  return t;
+}

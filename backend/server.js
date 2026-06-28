@@ -239,12 +239,12 @@ async function startServer() {
   });
 
   try {
-    await pool.query('ALTER TABLE gardens MODIFY COLUMN image TEXT');
+    await pool.query('ALTER TABLE gardens ALTER COLUMN image TYPE TEXT');
     console.log('[DB] Migrated gardens.image column to TEXT');
   } catch {}
 
   try {
-    await pool.query('ALTER TABLE seeds MODIFY COLUMN videoUrl TEXT');
+    await pool.query('ALTER TABLE seeds ALTER COLUMN videoUrl TYPE TEXT');
     console.log('[DB] Migrated seeds.videoUrl column to TEXT');
   } catch {}
 
@@ -261,8 +261,8 @@ async function startServer() {
   try {
     await initializeDB();
   } catch (err) {
-    console.error('[DB] Failed to preload MySQL data:', err);
-    console.warn('[DB] Running without MySQL — using empty in-memory store');
+    console.error('[DB] Failed to preload data:', err);
+    console.warn('[DB] Running without PostgreSQL — using empty in-memory store');
   }
 
   // --- API ROUTES ---
@@ -270,7 +270,7 @@ async function startServer() {
   // Register
   app.post('/api/auth/register', async (req, res) => {
     try {
-      const { email, phone, password, name } = req.body;
+      const { email, phone, password, name, country } = req.body;
       if (!email || !phone || !password) {
         return res.status(400).json({ error: 'All fields are required.' });
       }
@@ -286,11 +286,11 @@ async function startServer() {
 
       try {
         await pool.query(
-          'INSERT INTO users (id, email, phone, name, passwordHash, isVerified, verificationCode, createdAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-          [userId, email, phone, name || '', password, false, otpCode, createdAt]
+          'INSERT INTO users (id, email, phone, name, passwordHash, isVerified, verificationCode, createdAt, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+          [userId, email, phone, name || '', password, false, otpCode, createdAt, country || '']
         );
       } catch (sqlErr) {
-        console.warn('[AUTH] MySQL insert failed, falling back to JSON db only:', sqlErr);
+        console.warn('[PG] Insert failed, falling back to JSON db only:', sqlErr);
       }
 
       try {
@@ -304,6 +304,7 @@ async function startServer() {
           isVerified: false,
           verificationCode: otpCode,
           current_session_id: '',
+          country: country || '',
           paidGardens: [],
           createdAt: createdAt
         });
@@ -640,6 +641,18 @@ async function startServer() {
     }
   });
 
+  // Public stats for landing page
+  app.get('/api/stats', (req, res) => {
+    const db = readDB();
+    const countries = new Set((db.users || []).map(u => u.country).filter(Boolean));
+    return res.json({
+      totalUsers: db.users.length,
+      totalGardens: db.gardens.length,
+      totalSeeds: (db.seeds || []).length,
+      totalCountries: countries.size || 1,
+    });
+  });
+
   // List Gardens
   app.get('/api/gardens', async (req, res) => {
     const db = readDB();
@@ -662,7 +675,7 @@ async function startServer() {
     db.seeds.filter(s => s.gardenId === id).forEach(s => map.set(s.id, s));
     try {
       const [rows] = await pool.query(
-        'SELECT s.*, GROUP_CONCAT(st.tag) AS tags FROM seeds s LEFT JOIN seed_tags st ON st.seedId = s.id WHERE s.gardenId = ? GROUP BY s.id ORDER BY s.sortOrder, s.id',
+        'SELECT s.*, STRING_AGG(st.tag, \',\') AS tags FROM seeds s LEFT JOIN seed_tags st ON st.seedId = s.id WHERE s.gardenId = ? GROUP BY s.id ORDER BY s.sortOrder, s.id',
         [id]
       );
       rows.forEach(r => {
@@ -683,7 +696,7 @@ async function startServer() {
     (db.seeds || []).forEach(s => map.set(s.id, s));
     try {
       const [rows] = await pool.query(
-        'SELECT s.*, GROUP_CONCAT(st.tag) AS tags FROM seeds s LEFT JOIN seed_tags st ON st.seedId = s.id GROUP BY s.id ORDER BY s.sortOrder, s.id'
+        'SELECT s.*, STRING_AGG(st.tag, \',\') AS tags FROM seeds s LEFT JOIN seed_tags st ON st.seedId = s.id GROUP BY s.id ORDER BY s.sortOrder, s.id'
       );
       rows.forEach(r => {
         if (!map.has(r.id)) {
@@ -750,7 +763,7 @@ async function startServer() {
       }
 
       await pool.query(
-        'INSERT INTO student_growth (userId, seedId, watchedSeconds, lastUpdated) VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE watchedSeconds = ?, lastUpdated = NOW()',
+        'INSERT INTO student_growth (userId, seedId, watchedSeconds, lastUpdated) VALUES (?, ?, ?, NOW()) ON CONFLICT (userId, seedId) DO UPDATE SET watchedSeconds = EXCLUDED.watchedSeconds, lastUpdated = NOW()',
         [user.id, seedId, watchedSeconds, watchedSeconds]
       );
 
@@ -858,7 +871,7 @@ async function startServer() {
       avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.email)}`,
       question: text,
       text,
-      createdTime: new Date().toISOString(),
+      createdTime: mysqlNow(),
       replies: []
     };
 
@@ -867,9 +880,59 @@ async function startServer() {
     pool.query(
       'INSERT INTO queries (id, seedId, studentName, studentEmail, avatar, question, createdTime) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [newQuery.id, newQuery.seedId, newQuery.studentName, newQuery.studentEmail, newQuery.avatar, newQuery.question, newQuery.createdTime]
-    ).catch(err => console.warn('[MySQL] Query insert failed:', err));
+    ).catch(err => console.warn('[PG] Query insert failed:', err));
 
     return res.json({ success: true, query: newQuery });
+  });
+
+  // Contact form submission
+  app.post('/api/contact', async (req, res) => {
+    try {
+      const { name, email, subject, message } = req.body;
+      if (!name || !email || !message) {
+        return res.status(400).json({ error: 'Name, email, and message are required.' });
+      }
+
+      const id = 'c_' + genId();
+      const db = readDB();
+      if (!db.contacts) db.contacts = [];
+
+      const entry = { id, name, email, subject: subject || '', message, status: 'unread', createdAt: mysqlNow() };
+      db.contacts.push(entry);
+      writeDB(db);
+
+      pool.query(
+        'INSERT INTO contacts (id, name, email, subject, message, status, createdAt) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [entry.id, entry.name, entry.email, entry.subject, entry.message, entry.status, entry.createdAt]
+      ).catch(err => console.warn('[PostgreSQL] Contact insert failed:', err));
+
+      // Notify admin via email
+      const adminHtml = `
+        <div style="font-family:monospace;background:#090D16;padding:24px;border-radius:12px;max-width:600px;margin:0 auto">
+          <div style="border-bottom:2px solid #a855f7;padding-bottom:12px;margin-bottom:16px">
+            <h2 style="color:#22D3EE;margin:0;font-size:18px">📬 New Contact Message</h2>
+          </div>
+          <table style="width:100%;font-size:13px;color:#ccc">
+            <tr><td style="padding:6px 0;color:#888">Name</td><td style="padding:6px 0;color:#fff">${name}</td></tr>
+            <tr><td style="padding:6px 0;color:#888">Email</td><td style="padding:6px 0;color:#22D3EE">${email}</td></tr>
+            <tr><td style="padding:6px 0;color:#888">Subject</td><td style="padding:6px 0;color:#fff">${subject || '(none)'}</td></tr>
+          </table>
+          <div style="margin-top:16px;padding:16px;background:#0c101d;border:1px solid #a855f733;border-radius:8px;color:#ddd;font-size:13px;white-space:pre-wrap">${message}</div>
+          <div style="margin-top:16px;padding-top:12px;border-top:1px solid #a855f733;font-size:10px;color:#666;text-align:center">Knowledge Garden - Contact System</div>
+        </div>`;
+
+      const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER;
+      if (adminEmail) {
+        sendEmail(adminEmail, `[Contact] ${subject || 'New Message'} from ${name}`, adminHtml).catch(e =>
+          console.warn('[Contact] Failed to send admin notification:', e.message)
+        );
+      }
+
+      return res.json({ success: true, contact: entry });
+    } catch (err) {
+      console.error('[Contact] Error:', err);
+      return res.status(500).json({ error: 'Failed to submit contact message.' });
+    }
   });
 
   function parseDurationToSeconds(duration) {
@@ -918,7 +981,7 @@ async function startServer() {
       if (email) {
         email.isRead = true;
         pool.query('UPDATE emails SET isRead = ? WHERE id = ?', [true, emailId])
-          .catch(err => console.warn('[MySQL] Email read update failed:', err));
+          .catch(err => console.warn('[PG] Email read update failed:', err));
       }
       return res.json({ success: true });
     } catch (err) {
@@ -956,7 +1019,7 @@ async function startServer() {
       pool.query(
         'INSERT INTO emails (id, userId, toEmail, subject, bodyEn, bodyAr, bodyTr, otpCode, isRead, timestamp, isGrowthReport, isWelcome) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [emailId, user.id, 'academic-registry@knowledge-garden.io', subject, body, body, body, null, true, mysqlNow(), false, false]
-      ).catch(err => console.warn('[MySQL] Email insert failed:', err));
+      ).catch(err => console.warn('[PG] Email insert failed:', err));
       
       return res.json({ success: true, message: 'Message transmitted to Registry node.' });
     } catch (err) {
@@ -980,7 +1043,7 @@ async function startServer() {
       
       if (db.emails.length !== initialCount) {
         pool.query('DELETE FROM emails WHERE id = ?', [emailId])
-          .catch(err => console.warn('[MySQL] Email delete failed:', err));
+          .catch(err => console.warn('[PG] Email delete failed:', err));
       }
 
       return res.json({ success: true });
@@ -1117,8 +1180,8 @@ async function startServer() {
         pool.query(
           'INSERT INTO otp_verifications (id, userId, gardenId, otpCode, isUsed, timestamp) VALUES (?, ?, ?, ?, ?, ?)',
           [otpId, user.id, gardenId, otpCode, false, otpTimestamp]
-        ).catch(err => console.warn('[MySQL] OTP insert failed:', err));
-      }).catch(err => console.warn('[MySQL] OTP delete failed:', err));
+        ).catch(err => console.warn('[PG] OTP insert failed:', err));
+      }).catch(err => console.warn('[PG] OTP delete failed:', err));
 
       const emailId = 'em-otp-' + genId();
       const subject = `Verification OTP: Unlock "${garden.titleEn}" Core Growth Report`;
@@ -1147,7 +1210,7 @@ async function startServer() {
       pool.query(
         'INSERT INTO emails (id, userId, toEmail, subject, bodyEn, bodyAr, bodyTr, otpCode, isRead, timestamp, isGrowthReport, isWelcome, gardenId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [emailId, user.id, user.email, subject, bodyEn, bodyAr, bodyTr, otpCode, false, mysqlNow(), false, false, gardenId]
-      ).catch(err => console.warn('[MySQL] OTP email insert failed:', err));
+      ).catch(err => console.warn('[PG] OTP email insert failed:', err));
 
       let smtpSent = false;
       let smtpMethodUsed = 'None (Mock Inbox Only)';
@@ -1247,11 +1310,11 @@ async function startServer() {
       });
 
       pool.query('UPDATE otp_verifications SET isUsed = ? WHERE id = ?', [true, verification.id])
-        .catch(err => console.warn('[MySQL] OTP update failed:', err));
+        .catch(err => console.warn('[PG] OTP update failed:', err));
       pool.query(
         'INSERT INTO emails (id, userId, toEmail, subject, bodyEn, bodyAr, bodyTr, isRead, timestamp, isGrowthReport, isWelcome, gardenId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [reportId, user.id, user.email, emailSubject, bodyEn, bodyAr, bodyTr, false, mysqlNow(), true, false, gardenId]
-      ).catch(err => console.warn('[MySQL] Report email insert failed:', err));
+      ).catch(err => console.warn('[PG] Report email insert failed:', err));
 
       const reportPayload = {
         id: reportId,
@@ -1617,11 +1680,11 @@ async function startServer() {
       pool.query(
         `INSERT INTO gardens (id, titleEn, titleAr, titleTr, descriptionEn, descriptionAr, descriptionTr, category, priceEGP, priceTRY, rating, image)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-         ON DUPLICATE KEY UPDATE titleEn=VALUES(titleEn), titleAr=VALUES(titleAr), titleTr=VALUES(titleTr),
-           descriptionEn=VALUES(descriptionEn), descriptionAr=VALUES(descriptionAr), descriptionTr=VALUES(descriptionTr),
-           category=VALUES(category), priceEGP=VALUES(priceEGP), priceTRY=VALUES(priceTRY), image=VALUES(image)`,
+         ON CONFLICT (id) DO UPDATE SET titleEn=EXCLUDED.titleEn, titleAr=EXCLUDED.titleAr, titleTr=EXCLUDED.titleTr,
+           descriptionEn=EXCLUDED.descriptionEn, descriptionAr=EXCLUDED.descriptionAr, descriptionTr=EXCLUDED.descriptionTr,
+           category=EXCLUDED.category, priceEGP=EXCLUDED.priceEGP, priceTRY=EXCLUDED.priceTRY, image=EXCLUDED.image`,
         [gId, titleEn, titleAr, titleTr, descriptionEn, descriptionAr, descriptionTr, category, Number(priceEGP), Number(priceTRY), 5.0, image || '']
-      ).catch(err => console.warn('[MySQL] Garden upsert failed:', err));
+      ).catch(err => console.warn('[PostgreSQL] Garden upsert failed:', err));
     }
     logAdminAction('CMS_GARDEN_UPDATE', { id, titleEn, category });
     return res.json({ success: true });
@@ -1676,10 +1739,10 @@ async function startServer() {
       pool.query(
         `INSERT INTO seeds (id, gardenId, titleEn, titleAr, titleTr, duration, videoUrl, status, section, sortOrder)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-         ON DUPLICATE KEY UPDATE gardenId=VALUES(gardenId), titleEn=VALUES(titleEn), titleAr=VALUES(titleAr),
-           titleTr=VALUES(titleTr), duration=VALUES(duration), videoUrl=VALUES(videoUrl), section=VALUES(section), sortOrder=VALUES(sortOrder)`,
+         ON CONFLICT (id) DO UPDATE SET gardenId=EXCLUDED.gardenId, titleEn=EXCLUDED.titleEn, titleAr=EXCLUDED.titleAr,
+           titleTr=EXCLUDED.titleTr, duration=EXCLUDED.duration, videoUrl=EXCLUDED.videoUrl, section=EXCLUDED.section, sortOrder=EXCLUDED.sortOrder`,
         [sId, gardenId, titleEn, titleAr, titleTr, duration, videoUrl || 'bunny_mock_default', 'bloomed', section || '', sortOrder ?? 0]
-      ).catch(err => console.warn('[MySQL] Seed upsert failed:', err));
+      ).catch(err => console.warn('[PostgreSQL] Seed upsert failed:', err));
       if (finalTags) {
         pool.query('DELETE FROM seed_tags WHERE seedId = ?', [sId]).catch(() => {});
         for (const tag of finalTags) {
@@ -1738,7 +1801,7 @@ async function startServer() {
       pool.query(
         'INSERT INTO seeds (id, gardenId, titleEn, titleAr, titleTr, duration, videoUrl, status, section, sortOrder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [seed.id, gardenId, seed.titleEn, seed.titleAr, seed.titleTr, seed.duration, seed.videoUrl, 'bloomed', seed.section, seed.sortOrder]
-      ).catch(err => console.warn('[MySQL] Bulk seed insert failed:', err));
+      ).catch(err => console.warn('[PG] Bulk seed insert failed:', err));
       if (seed.tags) {
         for (const tag of seed.tags) {
           pool.query('INSERT INTO seed_tags (seedId, tag) VALUES (?, ?)', [seed.id, tag]).catch(() => {});
@@ -1851,7 +1914,7 @@ async function startServer() {
     pool.query(
       'INSERT INTO query_replies (id, queryId, author, text, timestamp) VALUES (?, ?, ?, ?, ?)',
       [replyId, queryId, 'System Admin', text, replyTimestamp]
-    ).catch(err => console.warn('[MySQL] Reply insert failed:', err));
+    ).catch(err => console.warn('[PG] Reply insert failed:', err));
     logAdminAction('QUERY_ANSWERED', { queryId });
     return res.json({ success: true, query });
   });
@@ -1866,6 +1929,39 @@ async function startServer() {
   app.get('/api/admin/queries', (req, res) => {
     const db = readDB();
     return res.json(db.queries);
+  });
+
+  // Admin: Get all contacts
+  app.get('/api/admin/contacts', (req, res) => {
+    const db = readDB();
+    return res.json(db.contacts || []);
+  });
+
+  // Admin: Mark contact as read
+  app.post('/api/admin/contacts/read', (req, res) => {
+    const { id } = req.body;
+    if (!id) return res.status(400).json({ error: 'Contact ID required.' });
+    const db = readDB();
+    const contact = (db.contacts || []).find(c => c.id === id);
+    if (contact) {
+      contact.status = 'read';
+      writeDB(db);
+      pool.query('UPDATE contacts SET status = ? WHERE id = ?', ['read', id])
+        .catch(err => console.warn('[PG] Contact update failed:', err));
+    }
+    return res.json({ success: true });
+  });
+
+  // Admin: Delete contact
+  app.post('/api/admin/contacts/delete', (req, res) => {
+    const { id } = req.body;
+    if (!id) return res.status(400).json({ error: 'Contact ID required.' });
+    const db = readDB();
+    db.contacts = (db.contacts || []).filter(c => c.id !== id);
+    writeDB(db);
+    pool.query('DELETE FROM contacts WHERE id = ?', [id])
+      .catch(err => console.warn('[PG] Contact delete failed:', err));
+    return res.json({ success: true });
   });
 
   // Admin: Get audit logs
@@ -1964,13 +2060,13 @@ async function startServer() {
       pool.query(
         `INSERT INTO quiz_questions (id, seedId, timestamp, questionEn, questionAr, questionTr, optionsEn, optionsAr, optionsTr, correctIndex)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-         ON DUPLICATE KEY UPDATE seedId=VALUES(seedId), timestamp=VALUES(timestamp), questionEn=VALUES(questionEn),
-         questionAr=VALUES(questionAr), questionTr=VALUES(questionTr), optionsEn=VALUES(optionsEn),
-         optionsAr=VALUES(optionsAr), optionsTr=VALUES(optionsTr), correctIndex=VALUES(correctIndex)`,
+         ON CONFLICT (id) DO UPDATE SET seedId=EXCLUDED.seedId, timestamp=EXCLUDED.timestamp, questionEn=EXCLUDED.questionEn,
+         questionAr=EXCLUDED.questionAr, questionTr=EXCLUDED.questionTr, optionsEn=EXCLUDED.optionsEn,
+         optionsAr=EXCLUDED.optionsAr, optionsTr=EXCLUDED.optionsTr, correctIndex=EXCLUDED.correctIndex`,
         [qId, seedId, questionData.timestamp, questionEn, questionData.questionAr, questionData.questionTr,
          JSON.stringify(questionData.optionsEn), JSON.stringify(questionData.optionsAr), JSON.stringify(questionData.optionsTr),
          questionData.correctIndex]
-      ).catch(err => console.warn('[MySQL] Quiz question sync failed:', err));
+      ).catch(err => console.warn('[PostgreSQL] Quiz question sync failed:', err));
 
       logAdminAction('QUIZ_QUESTION_UPDATE', { id: questionData.id, seedId });
       return res.json({ success: true, question: questionData });
@@ -2034,9 +2130,9 @@ async function startServer() {
       writeDB(db);
 
       pool.query(
-        'INSERT INTO quiz_answers (userId, userEmail, userName, seedId, questionId, isCorrect, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE userEmail=VALUES(userEmail), userName=VALUES(userName), isCorrect=VALUES(isCorrect), timestamp=VALUES(timestamp)',
+        'INSERT INTO quiz_answers (userId, userEmail, userName, seedId, questionId, isCorrect, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT (userId, seedId, questionId) DO UPDATE SET userEmail=EXCLUDED.userEmail, userName=EXCLUDED.userName, isCorrect=EXCLUDED.isCorrect, timestamp=EXCLUDED.timestamp',
         [user.id, userEmail, userName, question.seedId, questionId, isCorrect, now]
-      ).catch(err => console.warn('[MySQL] Quiz answer sync failed:', err));
+      ).catch(err => console.warn('[PostgreSQL] Quiz answer sync failed:', err));
 
       return res.json({ correct: isCorrect });
     } catch (err) {
@@ -2078,9 +2174,9 @@ async function startServer() {
       writeDB(db);
 
       pool.query(
-        'INSERT INTO quiz_answers (userId, userEmail, userName, seedId, questionId, isCorrect, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE userEmail=VALUES(userEmail), userName=VALUES(userName), isCorrect=VALUES(isCorrect), timestamp=VALUES(timestamp)',
+        'INSERT INTO quiz_answers (userId, userEmail, userName, seedId, questionId, isCorrect, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT (userId, seedId, questionId) DO UPDATE SET userEmail=EXCLUDED.userEmail, userName=EXCLUDED.userName, isCorrect=EXCLUDED.isCorrect, timestamp=EXCLUDED.timestamp',
         [user.id, userEmail, userName, question.seedId, questionId, isCorrect, now]
-      ).catch(err => console.warn('[MySQL] Quiz answer sync failed:', err));
+      ).catch(err => console.warn('[PostgreSQL] Quiz answer sync failed:', err));
 
       return res.json({ success: true, isCorrect, correctIndex: question.correctIndex });
     } catch (err) {
@@ -2229,13 +2325,16 @@ async function startServer() {
 
   // Auto-migrations
   try {
-    await pool.query(`ALTER TABLE users ADD COLUMN paidGardens JSON DEFAULT ('[]')`);
+    await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS paidGardens JSONB DEFAULT '[]'`);
   } catch {}
   try {
-    await pool.query(`ALTER TABLE quiz_answers ADD COLUMN userEmail VARCHAR(255) NOT NULL DEFAULT ''`);
+    await pool.query(`ALTER TABLE quiz_answers ADD COLUMN IF NOT EXISTS userEmail VARCHAR(255) NOT NULL DEFAULT ''`);
   } catch {}
   try {
-    await pool.query(`ALTER TABLE quiz_answers ADD COLUMN userName VARCHAR(255) NOT NULL DEFAULT ''`);
+    await pool.query(`ALTER TABLE quiz_answers ADD COLUMN IF NOT EXISTS userName VARCHAR(255) NOT NULL DEFAULT ''`);
+  } catch {}
+  try {
+    await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS country VARCHAR(100) NOT NULL DEFAULT ''`);
   } catch {}
 
   // Serve assets and handle Vite in development
@@ -2307,7 +2406,7 @@ initializeDB()
   })
   .catch((err) => {
     console.error('[DB] Failed to initialize database:', err);
-    console.warn('[DB] Running without MySQL — some features may be degraded');
+    console.warn('[DB] Running without PostgreSQL — some features may be degraded');
     const isVercel = !!process.env.VERCEL;
     if (!isVercel) {
       startServer().catch((e) => console.error('[SERVER] Failed to start:', e));

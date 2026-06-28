@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Shield, X, Users, CreditCard, BookOpen, BarChart3, MessageSquare,
   RefreshCw, Loader2, CheckCircle, XCircle, Trash2, Plus, Search,
-  Mail, Zap, Trophy, FileText, BrainCircuit, Unlock, Settings
+  Mail, Zap, Trophy, FileText, BrainCircuit, Unlock, Settings,
+  MessageCircle, Trash
 } from 'lucide-react';
 
 const tr = (lang, en, ar, tr) => lang === 'ar' ? ar : lang === 'tr' ? tr : en;
@@ -1175,6 +1176,7 @@ export function AdminPanel({ lang, onClose, onGardensChange }) {
     { key: 'queries', label: tr(lang, 'Queries', 'الاستفسارات', 'Sorular'), icon: MessageSquare },
     { key: 'quiz-degrees', label: tr(lang, 'Quiz Degrees', 'درجات الاختبار', 'Sınav Dereceleri'), icon: Trophy },
     { key: 'audit', label: tr(lang, 'Audit Logs', 'سجلات التدقيق', 'Denetim Günlükleri'), icon: FileText },
+    { key: 'contacts', label: tr(lang, 'Contacts', 'جهات الاتصال', 'İletişim'), icon: MessageCircle },
     { key: 'smtp', label: tr(lang, 'SMTP', 'SMTP', 'SMTP'), icon: Mail },
   ];
 
@@ -1207,10 +1209,137 @@ export function AdminPanel({ lang, onClose, onGardensChange }) {
         {tab === 'quiz-degrees' && <QuizDegreesTab adminToken={adminToken} lang={lang} />}
         {tab === 'audit' && <AuditLogsTab adminToken={adminToken} lang={lang} />}
         {tab === 'queries' && <QueriesTab adminToken={adminToken} lang={lang} />}
+        {tab === 'contacts' && <ContactsTab adminToken={adminToken} lang={lang} />}
         {tab === 'smtp' && <SmtpTab adminToken={adminToken} lang={lang} />}
       </div>
     </div>
   );
+}
+
+function ContactsTab({ adminToken, lang }) {
+  const tr = (en, ar, tr) => lang === 'ar' ? ar : lang === 'tr' ? tr : en;
+  const [contacts, setContacts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchContacts = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/admin/contacts', {
+        headers: { 'x-admin-token': adminToken }
+      });
+      const data = await res.json();
+      setContacts(Array.isArray(data) ? data : []);
+    } catch { setContacts([]); }
+    finally { setLoading(false); }
+  }, [adminToken]);
+
+  useEffect(() => { fetchContacts(); }, [fetchContacts]);
+
+  const markRead = async (id) => {
+    await fetch('/api/admin/contacts/read', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-token': adminToken },
+      body: JSON.stringify({ id }),
+    });
+    fetchContacts();
+  };
+
+  const handleDelete = async (id) => {
+    if (!confirm(tr('Delete this contact message?', 'حذف هذه الرسالة؟', 'Bu mesaj silinsin mi?'))) return;
+    await fetch('/api/admin/contacts/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-token': adminToken },
+      body: JSON.stringify({ id }),
+    });
+    fetchContacts();
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-16">
+        <Loader2 size={24} className="animate-spin text-cyan-400" />
+      </div>
+    );
+  }
+
+  const unread = contacts.filter(c => c.status === 'unread');
+  const read = contacts.filter(c => c.status === 'read');
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <h3 className="text-sm font-extrabold text-gray-200 uppercase tracking-wider">
+            {tr('Contact Messages', 'رسائل الاتصال', 'İletişim Mesajları')}
+          </h3>
+          <p className="text-[10px] text-gray-500 font-mono mt-0.5">
+            {tr('Messages from the contact form', 'رسائل من نموذج الاتصال', 'İletişim formundan gelen mesajlar')}
+          </p>
+        </div>
+        <button onClick={fetchContacts} className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-cyan-400">
+          <RefreshCw size={16} />
+        </button>
+      </div>
+
+      {contacts.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-16 text-center">
+          <MessageCircle size={36} className="text-purple-500/30 mb-3" />
+          <p className="text-sm text-gray-500 font-mono">
+            {tr('No contact messages yet.', 'لا توجد رسائل اتصال بعد.', 'Henüz iletişim mesajı yok.')}
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {unread.length > 0 && (
+            <div>
+              <p className="text-[10px] text-cyan-400 font-mono font-bold uppercase tracking-wider mb-2">
+                {tr('Unread', 'غير مقروء', 'Okunmamış')} ({unread.length})
+              </p>
+              {unread.map(c => renderContactCard(c))}
+            </div>
+          )}
+          {read.length > 0 && (
+            <div>
+              <p className="text-[10px] text-gray-500 font-mono font-bold uppercase tracking-wider mb-2 mt-4">
+                {tr('Read', 'مقروء', 'Okunmuş')} ({read.length})
+              </p>
+              {read.map(c => renderContactCard(c))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+
+  function renderContactCard(c) {
+    return (
+      <div
+        key={c.id}
+        onClick={() => { if (c.status === 'unread') markRead(c.id); }}
+        className={`glass-panel rounded-xl p-4 cursor-pointer transition-all duration-200 hover:border-purple-500/30 ${c.status === 'unread' ? 'border-cyan-500/30 bg-cyan-950/10' : 'opacity-70'}`}
+      >
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-sm font-bold text-white truncate">{c.name}</span>
+              {c.status === 'unread' && <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0" />}
+            </div>
+            <a href={`mailto:${c.email}`} className="text-[11px] text-cyan-400 hover:underline font-mono">{c.email}</a>
+            {c.subject && <p className="text-[11px] text-gray-400 font-mono mt-0.5">{c.subject}</p>}
+            <p className="text-[12px] text-gray-300 mt-2 leading-relaxed whitespace-pre-wrap line-clamp-3">{c.message}</p>
+            <p className="text-[9px] text-gray-600 font-mono mt-2">{c.createdAt}</p>
+          </div>
+          <button
+            onClick={(e) => { e.stopPropagation(); handleDelete(c.id); }}
+            className="p-1.5 rounded-lg hover:bg-red-500/10 text-gray-500 hover:text-red-400 transition-colors shrink-0"
+            title={tr('Delete', 'حذف', 'Sil')}
+          >
+            <Trash size={14} />
+          </button>
+        </div>
+      </div>
+    );
+  }
 }
 
 function SmtpTab({ adminToken, lang }) {

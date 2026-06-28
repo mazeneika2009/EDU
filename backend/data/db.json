@@ -1,6 +1,21 @@
 {
   "users": [
     {
+      "id": "u_d768b8j6j",
+      "email": "mazeneika2009@gmail.com",
+      "phone": "123456",
+      "name": "mazen",
+      "passwordHash": "M",
+      "isVerified": 1,
+      "verificationCode": "",
+      "createdAt": "2026-06-26T01:08:30.000Z",
+      "current_session_id": "session_5nse0576y",
+      "paidGardens": [
+        "g_h4r7t9w1q",
+        "g_k7m3x9p2r"
+      ]
+    },
+    {
       "id": "u_g39ltxst5",
       "email": "mazeneika20@gmail.com",
       "phone": "00",
@@ -13,50 +28,9 @@
       "paidGardens": [
         null
       ]
-    },
-    {
-      "id": "u_d768b8j6j",
-      "email": "mazeneika2009@gmail.com",
-      "phone": "123456",
-      "name": "mazen",
-      "passwordHash": "M",
-      "isVerified": false,
-      "verificationCode": "532323",
-      "current_session_id": "",
-      "paidGardens": [
-        "g_h4r7t9w1q"
-      ],
-      "createdAt": "2026-06-26 05:08:30"
     }
   ],
-  "emails": [
-    {
-      "id": "em-welcome-ucrfpjrry",
-      "userId": "u_d768b8j6j",
-      "toEmail": "mazeneika2009@gmail.com",
-      "subject": "Welcome to the Knowledge Garden!",
-      "bodyEn": "Welcome gardener! Your node is now initialized. This is your secure sandbox inbox where you will receive OTP codes, reports, and system alerts. You can also compose messages to the Academic Registry here.",
-      "bodyAr": "مرحباً بك يا مزارع المعرفة! تم تفعيل حسابك بنجاح. هذا هو صندوق الوارد الآمن الخاص بك حيث ستتلقى أكواد التحقق، التقارير، وتنبيهات النظام. يمكنك أيضاً إرسال استفساراتك إلى السجل الأكاديمي من هنا.",
-      "bodyTr": "Hoş geldin bahçıvan! Düğümünüz başarıyla başlatıldı. Bu, OTP kodlarını, raporları ve sistem uyarılarını alacağınız güvenli sandbox gelen kutunuzdur. Ayrıca buradan Akademik Kayıt birimine mesaj gönderebilirsiniz.",
-      "isRead": false,
-      "timestamp": "2026-06-26T05:08:30.477Z",
-      "isGrowthReport": false,
-      "isWelcome": true
-    },
-    {
-      "id": "em-pay-ok-wszjtdic1",
-      "userId": "u_d768b8j6j",
-      "toEmail": "mazeneika2009@gmail.com",
-      "subject": "Payment Approved! Access Granted",
-      "bodyEn": "Your payment for \"Marketing with Real Videos\" has been verified. Full classroom access is now unlocked!",
-      "bodyAr": "تم توثيق دفعتك لـ \"التسويق فيديوهات واقعية\". تم فتح الوصول الكامل لقاعة الدراسة الآن!",
-      "bodyTr": "\"Gerçek Videolarla Pazarlama\" ödemeniz doğrulandı. Sınıf erişimi artık tamamen açıldı!",
-      "isRead": false,
-      "timestamp": "2026-06-26T05:18:32.589Z",
-      "isGrowthReport": false,
-      "isWelcome": false
-    }
-  ],
+  "emails": [],
   "gardens": [
     {
       "id": "g_b5n8d2c1f",
@@ -433,11 +407,7 @@
       "status": "bloomed",
       "section": "Getting Started",
       "sortOrder": 1,
-      "tags": [
-        "Basics",
-        "HTML",
-        "Web"
-      ]
+      "tags": []
     },
     {
       "id": "s_h_10",
@@ -1086,132 +1056,92 @@
       "paymentMethod": "instapay:111",
       "screenshot": "/uploads/1782451095830-2h6bl6.jfif",
       "status": "approved",
-      "timestamp": "2026-06-26 05:18:16"
+      "timestamp": "2026-06-26T01:18:16.000Z"
+    },
+    {
+      "id": "TXN_EG_MDCLGMB3W",
+      "userId": "u_d768b8j6j",
+      "userEmail": "mazeneika2009@gmail.com",
+      "gardenId": "g_k7m3x9p2r",
+      "currency": "EGP",
+      "amount": 500,
+      "gateway": "instapay",
+      "paymentMethod": "instapay:01094332602",
+      "screenshot": "/uploads/1782591312116-4c1rux.jfif",
+      "status": "approved",
+      "timestamp": "2026-06-27T16:15:12.000Z"
     }
   ],
   "student_growth": [
     {
-      "userId": "u_0xosos8w3",
+      "userId": "u_d768b8j6j",
       "seedId": "s_e_1",
       "watchedSeconds": 720,
-      "lastUpdated": "2026-06-26T02:56:58.000Z"
+      "lastUpdated": "2026-06-27T20:40:07.000Z"
     },
     {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_10",
-      "watchedSeconds": 1320,
-      "lastUpdated": "2026-06-26T02:57:09.000Z"
+      "userId": "u_d768b8j6j",
+      "seedId": "s_m_1",
+      "watchedSeconds": 900,
+      "lastUpdated": "2026-06-27T20:47:08.000Z"
     },
     {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_11",
-      "watchedSeconds": 1055,
-      "lastUpdated": "2026-06-26T02:57:10.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_12",
-      "watchedSeconds": 1575,
-      "lastUpdated": "2026-06-26T02:57:10.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_13",
-      "watchedSeconds": 1130,
-      "lastUpdated": "2026-06-26T02:57:10.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_14",
-      "watchedSeconds": 985,
-      "lastUpdated": "2026-06-26T02:57:10.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_15",
-      "watchedSeconds": 1450,
-      "lastUpdated": "2026-06-26T02:57:11.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_16",
-      "watchedSeconds": 1180,
-      "lastUpdated": "2026-06-26T02:57:11.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_17",
-      "watchedSeconds": 1315,
-      "lastUpdated": "2026-06-26T02:57:11.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_18",
-      "watchedSeconds": 1400,
-      "lastUpdated": "2026-06-26T02:57:11.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_19",
-      "watchedSeconds": 930,
-      "lastUpdated": "2026-06-26T02:57:11.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_2",
-      "watchedSeconds": 870,
-      "lastUpdated": "2026-06-26T02:57:12.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_20",
-      "watchedSeconds": 1680,
-      "lastUpdated": "2026-06-26T02:57:13.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_3",
-      "watchedSeconds": 975,
-      "lastUpdated": "2026-06-26T02:57:13.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_4",
-      "watchedSeconds": 1120,
-      "lastUpdated": "2026-06-26T02:57:13.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_5",
+      "userId": "u_d768b8j6j",
+      "seedId": "s_m_10",
       "watchedSeconds": 1160,
-      "lastUpdated": "2026-06-26T02:57:13.000Z"
+      "lastUpdated": "2026-06-27T20:14:36.000Z"
     },
     {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_6",
-      "watchedSeconds": 1265,
-      "lastUpdated": "2026-06-26T02:57:14.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_7",
-      "watchedSeconds": 1410,
-      "lastUpdated": "2026-06-26T02:57:14.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_8",
-      "watchedSeconds": 1510,
-      "lastUpdated": "2026-06-26T02:57:14.000Z"
-    },
-    {
-      "userId": "u_0xosos8w3",
-      "seedId": "s_e_9",
-      "watchedSeconds": 1245,
-      "lastUpdated": "2026-06-26T02:57:15.000Z"
+      "userId": "u_d768b8j6j",
+      "seedId": "s_m_11",
+      "watchedSeconds": 1085,
+      "lastUpdated": "2026-06-27T20:47:20.000Z"
     }
   ],
-  "queries": [],
+  "queries": [
+    {
+      "id": "q_i73vkpw3w",
+      "seedId": "s_e_1",
+      "studentName": "mazeneika2009",
+      "studentEmail": "mazeneika2009@gmail.com",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=mazeneika2009%40gmail.com",
+      "question": "thanks",
+      "createdTime": "2026-06-27T16:39:44.000Z",
+      "replies": [
+        {
+          "author": "System Admin",
+          "text": "you are wellcome ",
+          "timestamp": "2026-06-27T16:43:49.000Z"
+        }
+      ]
+    },
+    {
+      "id": "q_xp9knwqxm",
+      "seedId": "s_e_10",
+      "studentName": "mazeneika2009",
+      "studentEmail": "mazeneika2009@gmail.com",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=mazeneika2009%40gmail.com",
+      "question": "thanks",
+      "createdTime": "2026-06-27T16:40:27.000Z",
+      "replies": []
+    },
+    {
+      "id": "q_zm0z5xdq4",
+      "seedId": "s_m_1",
+      "studentName": "mazeneika2009",
+      "studentEmail": "mazeneika2009@gmail.com",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=mazeneika2009%40gmail.com",
+      "question": "شكرا",
+      "createdTime": "2026-06-27T16:38:57.000Z",
+      "replies": [
+        {
+          "author": "System Admin",
+          "text": "العفو",
+          "timestamp": "2026-06-27T16:43:36.000Z"
+        }
+      ]
+    }
+  ],
   "otp_verifications": [
     {
       "id": "otp_z0nc6u1im",
@@ -1739,6 +1669,24 @@
       "timestamp": "2026-06-25T22:57:40.000Z"
     },
     {
+      "userId": "u_d768b8j6j",
+      "userEmail": "mazeneika2009@gmail.com",
+      "userName": "mazen",
+      "seedId": "s_e_10",
+      "questionId": "qq_e_4",
+      "isCorrect": 1,
+      "timestamp": "2026-06-27T16:40:17.000Z"
+    },
+    {
+      "userId": "u_d768b8j6j",
+      "userEmail": "mazeneika2009@gmail.com",
+      "userName": "mazen",
+      "seedId": "s_m_1",
+      "questionId": "qq_m_1",
+      "isCorrect": 1,
+      "timestamp": "2026-06-27T16:14:08.000Z"
+    },
+    {
       "userId": "u_qv3ougnst",
       "userEmail": "mazeneika2009@gmail.com",
       "userName": "طالب",
@@ -1810,7 +1758,75 @@
         "createdAt": "2026-06-25T07:05:32.914Z"
       }
     ],
-    "s_h_10:mazeneika2009@gmail.com": []
+    "s_h_10:mazeneika2009@gmail.com": [],
+    "s_m_1:mazeneika2009@gmail.com": [
+      {
+        "text": "كلام مهم",
+        "timestamp": 0,
+        "createdAt": "2026-06-27T20:38:39.056Z"
+      },
+      {
+        "text": "كلام مهم جدا",
+        "timestamp": 0,
+        "createdAt": "2026-06-27T20:38:50.126Z"
+      }
+    ]
   },
-  "notes": []
+  "notes": [],
+  "contacts": [
+    {
+      "id": "c_n21q950iv",
+      "name": "ssds",
+      "email": "sscsc@gmail",
+      "subject": "cscsc",
+      "message": "cscscs",
+      "status": "read",
+      "createdAt": "2026-06-27 21:09:14"
+    },
+    {
+      "id": "c_34ai8qlyz",
+      "name": "swssw",
+      "email": ".omswswsw@gmail",
+      "subject": "ss",
+      "message": "ssxsxs",
+      "status": "read",
+      "createdAt": "2026-06-27 21:17:31"
+    },
+    {
+      "id": "c_tta6t7yjx",
+      "name": "rr",
+      "email": "mazeneika2009@gmail.com",
+      "subject": "rrr",
+      "message": "rrr",
+      "status": "read",
+      "createdAt": "2026-06-27 21:17:40"
+    },
+    {
+      "id": "c_eoa5m0chr",
+      "name": "saxs",
+      "email": "mazeneika2009@gmail.com",
+      "subject": "sasxsx",
+      "message": "ssxsxxaa",
+      "status": "read",
+      "createdAt": "2026-06-27 21:25:37"
+    },
+    {
+      "id": "c_x03slyvyh",
+      "name": "مازن",
+      "email": "mazeneika2009@gmail.com",
+      "subject": "0000",
+      "message": "ثصق4ثق43ق43قق43ق43ق43ق34",
+      "status": "read",
+      "createdAt": "2026-06-27 21:27:48"
+    },
+    {
+      "id": "c_w6r5xoitr",
+      "name": "مازن",
+      "email": "mazeneika2009@gmail.com",
+      "subject": "يييي",
+      "message": "يييييقثبثبث",
+      "status": "read",
+      "createdAt": "2026-06-27 21:29:43"
+    }
+  ]
 }

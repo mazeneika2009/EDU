@@ -1,5 +1,5 @@
 ﻿import dotenv from 'dotenv';
-import mysql from 'mysql2/promise';
+import pg from 'pg';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -7,29 +7,30 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, '.env') });
 
-const pool = mysql.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  port: Number(process.env.DB_PORT) || 3306,
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'knowledge_garden',
-  waitForConnections: true,
-  connectionLimit: 10,
-  multipleStatements: true,
+const rawPool = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+  max: 10,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 10000,
 });
+
+const origQuery = rawPool.query.bind(rawPool);
+rawPool.query = (text, params) => {
+  if (params && params.length > 0) {
+    let i = 0;
+    text = text.replace(/\?/g, () => `$${++i}`);
+    params = params.map(p => typeof p === 'boolean' ? (p ? 1 : 0) : p);
+  }
+  return origQuery(text, params).then(result => [result.rows]);
+};
 
 async function run() {
   try {
-    // 1. Run schema to ensure tables exist (use IF NOT EXISTS, skip DROP)
     const schema = fs.readFileSync(path.join(__dirname, '..', 'schema.sql'), 'utf8');
-    const safeSchema = schema
-      .replace(/DROP TABLE IF EXISTS .+;/g, '')
-      .replace('SET FOREIGN_KEY_CHECKS = 0;', '')
-      .replace('SET FOREIGN_KEY_CHECKS = 1;', '');
-    await pool.query(safeSchema);
+    await rawPool.query(schema);
+    try { await rawPool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS country VARCHAR(100) NOT NULL DEFAULT ''`); } catch {}
     console.log('[Seed] Tables ensured');
 
-    // 2. Gardens
     const gardens = [
       {
         id: 'g_b5n8d2c1f',
@@ -76,23 +77,21 @@ async function run() {
     ];
 
     for (const g of gardens) {
-      await pool.query(
+      await rawPool.query(
         `INSERT INTO gardens (id, titleEn, titleAr, titleTr, descriptionEn, descriptionAr, descriptionTr, category, priceEGP, priceTRY, rating, image)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-         ON DUPLICATE KEY UPDATE
-           titleEn=VALUES(titleEn), titleAr=VALUES(titleAr), titleTr=VALUES(titleTr),
-           descriptionEn=VALUES(descriptionEn), descriptionAr=VALUES(descriptionAr), descriptionTr=VALUES(descriptionTr),
-           category=VALUES(category), priceEGP=VALUES(priceEGP), priceTRY=VALUES(priceTRY),
-           rating=VALUES(rating), image=VALUES(image)`,
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+         ON CONFLICT (id) DO UPDATE SET
+           titleEn=EXCLUDED.titleEn, titleAr=EXCLUDED.titleAr, titleTr=EXCLUDED.titleTr,
+           descriptionEn=EXCLUDED.descriptionEn, descriptionAr=EXCLUDED.descriptionAr, descriptionTr=EXCLUDED.descriptionTr,
+           category=EXCLUDED.category, priceEGP=EXCLUDED.priceEGP, priceTRY=EXCLUDED.priceTRY,
+           rating=EXCLUDED.rating, image=EXCLUDED.image`,
         [g.id, g.titleEn, g.titleAr, g.titleTr, g.descriptionEn, g.descriptionAr, g.descriptionTr,
          g.category, g.priceEGP, g.priceTRY, g.rating, g.image]
       );
     }
     console.log('[Seed] 3 gardens inserted');
 
-    // 3. Seeds - 20 per garden with sections
     const seedData = [
-      // === HTML Garden (g_b5n8d2c1f) ===
       { id: 's_h_1', gardenId: 'g_b5n8d2c1f', titleEn: 'Introduction to HTML & Web Basics', titleAr: 'مقدمة في HTML وأساسيات الويب', titleTr: 'HTML ve Web Temellerine Giriş', duration: '12:30', section: 'Getting Started', sortOrder: 1, tags: 'HTML,Web,Basics', videoUrl: 'https://www.youtube.com/embed/-CNdRywgF7M' },
       { id: 's_h_2', gardenId: 'g_b5n8d2c1f', titleEn: 'Setting Up Your Development Environment', titleAr: 'إعداد بيئة التطوير', titleTr: 'Geliştirme Ortamını Kurma', duration: '15:00', section: 'Getting Started', sortOrder: 2, tags: 'Tools,Setup', videoUrl: 'https://www.youtube.com/embed/JZugtm7VwFk' },
       { id: 's_h_3', gardenId: 'g_b5n8d2c1f', titleEn: 'HTML Document Structure & Elements', titleAr: 'هيكل مستند HTML والعناصر', titleTr: 'HTML Belge Yapısı ve Öğeler', duration: '18:45', section: 'Getting Started', sortOrder: 3, tags: 'HTML,Structure', videoUrl: 'https://www.youtube.com/embed/h30Bvg4MhY0' },
@@ -113,8 +112,6 @@ async function run() {
       { id: 's_h_18', gardenId: 'g_b5n8d2c1f', titleEn: 'SEO Basics for HTML', titleAr: 'أساسيات تحسين محركات البحث لـHTML', titleTr: 'HTML için SEO Temelleri', duration: '15:50', section: 'Advanced HTML', sortOrder: 18, tags: 'SEO,HTML', videoUrl: 'https://www.youtube.com/embed/ORazAn-Iigg' },
       { id: 's_h_19', gardenId: 'g_b5n8d2c1f', titleEn: 'HTML Meta Tags & Open Graph', titleAr: 'علامات HTML الوصفية وOpen Graph', titleTr: 'HTML Meta Etiketleri ve Open Graph', duration: '12:10', section: 'Advanced HTML', sortOrder: 19, tags: 'Meta,SEO,HTML', videoUrl: 'https://www.youtube.com/embed/bi5bfH_gVWE' },
       { id: 's_h_20', gardenId: 'g_b5n8d2c1f', titleEn: 'Course Wrap-Up & Next Steps', titleAr: 'ختام الدورة والخطوات التالية', titleTr: 'Kurs Özeti ve Sonraki Adımlar', duration: '10:00', section: 'Projects', sortOrder: 20, tags: 'Wrap-Up', videoUrl: 'https://www.youtube.com/embed/HD13eq_Pmp8' },
-
-      // === Marketing Garden (g_h4r7t9w1q) ===
       { id: 's_m_1', gardenId: 'g_h4r7t9w1q', titleEn: 'Introduction to Digital Marketing', titleAr: 'مقدمة في التسويق الرقمي', titleTr: 'Dijital Pazarlamaya Giriş', duration: '15:00', section: 'Marketing Fundamentals', sortOrder: 1, tags: 'Marketing,Digital', videoUrl: 'https://www.youtube.com/embed/6RNJpItArSQ' },
       { id: 's_m_2', gardenId: 'g_h4r7t9w1q', titleEn: 'SEO Fundamentals - How Search Engines Work', titleAr: 'أساسيات تحسين محركات البحث - كيف تعمل محركات البحث', titleTr: 'SEO Temelleri - Arama Motorları Nasıl Çalışır', duration: '22:30', section: 'Marketing Fundamentals', sortOrder: 2, tags: 'SEO,Search', videoUrl: 'https://www.youtube.com/embed/OYRkIGaP80M' },
       { id: 's_m_3', gardenId: 'g_h4r7t9w1q', titleEn: 'Keyword Research & Strategy', titleAr: 'بحث الكلمات المفتاحية والاستراتيجية', titleTr: 'Anahtar Kelime Araştırması ve Stratejisi', duration: '18:45', section: 'Marketing Fundamentals', sortOrder: 3, tags: 'SEO,Keywords', videoUrl: 'https://www.youtube.com/embed/VG4l39h_qFU' },
@@ -135,8 +132,6 @@ async function run() {
       { id: 's_m_18', gardenId: 'g_h4r7t9w1q', titleEn: 'Marketing Budget Planning', titleAr: 'تخطيط ميزانية التسويق', titleTr: 'Pazarlama Bütçesi Planlaması', duration: '17:15', section: 'Brand & Strategy', sortOrder: 18, tags: 'Budget,Planning', videoUrl: 'https://www.youtube.com/embed/5altc8xTzBg' },
       { id: 's_m_19', gardenId: 'g_h4r7t9w1q', titleEn: 'Building a Marketing Campaign', titleAr: 'بناء حملة تسويقية', titleTr: 'Pazarlama Kampanyası Oluşturma', duration: '30:00', section: 'Campaign Projects', sortOrder: 19, tags: 'Campaign,Project', videoUrl: 'https://www.youtube.com/embed/-dCls0VoY58' },
       { id: 's_m_20', gardenId: 'g_h4r7t9w1q', titleEn: 'Course Wrap-Up & Marketing Career Path', titleAr: 'ختام الدورة والمسار المهني في التسويق', titleTr: 'Kurs Özeti ve Pazarlama Kariyer Yolu', duration: '11:30', section: 'Campaign Projects', sortOrder: 20, tags: 'Wrap-Up,Career', videoUrl: 'https://www.youtube.com/embed/DUAxT7RNGZ4' },
-
-      // === English Garden (g_k7m3x9p2r) ===
       { id: 's_e_1', gardenId: 'g_k7m3x9p2r', titleEn: 'Why Learn English? Mindset & Goals', titleAr: 'لماذا نتعلم الإنجليزية؟ العقلية والأهداف', titleTr: 'Neden İngilizce Öğrenmeli? Zihniyet ve Hedefler', duration: '12:00', section: 'Foundations', sortOrder: 1, tags: 'Introduction,Goals', videoUrl: 'https://www.youtube.com/embed/QxQUapA-2w4' },
       { id: 's_e_2', gardenId: 'g_k7m3x9p2r', titleEn: 'English Alphabet & Pronunciation Basics', titleAr: 'الأبجدية الإنجليزية وأساسيات النطق', titleTr: 'İngiliz Alfabesi ve Telaffuz Temelleri', duration: '14:30', section: 'Foundations', sortOrder: 2, tags: 'Pronunciation,Alphabet', videoUrl: 'https://www.youtube.com/embed/ZlO8Si2OkKk' },
       { id: 's_e_3', gardenId: 'g_k7m3x9p2r', titleEn: 'Common Greetings & Introductions', titleAr: 'التحيات الشائعة والتعارف', titleTr: 'Yaygın Selamlaşmalar ve Tanışmalar', duration: '16:15', section: 'Foundations', sortOrder: 3, tags: 'Greetings,Conversation', videoUrl: 'https://www.youtube.com/embed/JFmLF_xOAog' },
@@ -160,21 +155,20 @@ async function run() {
     ];
 
     for (const s of seedData) {
-      await pool.query(
+      await rawPool.query(
         `INSERT INTO seeds (id, gardenId, titleEn, titleAr, titleTr, duration, videoUrl, status, section, sortOrder)
-         VALUES (?, ?, ?, ?, ?, ?, ?, 'bloomed', ?, ?)
-         ON DUPLICATE KEY UPDATE
-           gardenId=VALUES(gardenId), titleEn=VALUES(titleEn), titleAr=VALUES(titleAr), titleTr=VALUES(titleTr),
-           duration=VALUES(duration), videoUrl=VALUES(videoUrl),
-           section=VALUES(section), sortOrder=VALUES(sortOrder)`,
+         VALUES ($1, $2, $3, $4, $5, $6, $7, 'bloomed', $8, $9)
+         ON CONFLICT (id) DO UPDATE SET
+           gardenId=EXCLUDED.gardenId, titleEn=EXCLUDED.titleEn, titleAr=EXCLUDED.titleAr, titleTr=EXCLUDED.titleTr,
+           duration=EXCLUDED.duration, videoUrl=EXCLUDED.videoUrl,
+           section=EXCLUDED.section, sortOrder=EXCLUDED.sortOrder`,
         [s.id, s.gardenId, s.titleEn, s.titleAr, s.titleTr, s.duration, s.videoUrl, s.section, s.sortOrder]
       );
-      // Insert tags
       if (s.tags) {
         const tags = s.tags.split(',');
         for (const tag of tags) {
-          await pool.query(
-            'INSERT INTO seed_tags (seedId, tag) VALUES (?, ?) ON DUPLICATE KEY UPDATE tag=VALUES(tag)',
+          await rawPool.query(
+            'INSERT INTO seed_tags (seedId, tag) VALUES ($1, $2) ON CONFLICT (seedId, tag) DO UPDATE SET tag=EXCLUDED.tag',
             [s.id, tag.trim()]
           );
         }
@@ -182,7 +176,6 @@ async function run() {
     }
     console.log('[Seed] 60 seeds inserted');
 
-    // 4. Users
     const users = [
       {
         id: 'u_0xosos8w3',
@@ -194,24 +187,25 @@ async function run() {
         verificationCode: '',
         createdAt: '2026-06-22 04:34:32',
         currentSessionId: null,
+        country: 'Egypt',
         paidGardens: JSON.stringify(['g_h4r7t9w1q', 'g_k7m3x9p2r', 'g_b5n8d2c1f']),
       },
     ];
 
     for (const u of users) {
-      await pool.query(
-        `INSERT INTO users (id, email, phone, name, passwordHash, isVerified, verificationCode, createdAt, current_session_id, paidGardens)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-         ON DUPLICATE KEY UPDATE
-           email=VALUES(email), phone=VALUES(phone), name=VALUES(name),
-           passwordHash=VALUES(passwordHash), isVerified=VALUES(isVerified),
-           verificationCode=VALUES(verificationCode), paidGardens=VALUES(paidGardens)`,
-        [u.id, u.email, u.phone, u.name, u.passwordHash, u.isVerified, u.verificationCode, u.createdAt, u.currentSessionId, u.paidGardens]
+      await rawPool.query(
+        `INSERT INTO users (id, email, phone, name, passwordHash, isVerified, verificationCode, createdAt, current_session_id, country, paidGardens)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+         ON CONFLICT (id) DO UPDATE SET
+           email=EXCLUDED.email, phone=EXCLUDED.phone, name=EXCLUDED.name,
+           passwordHash=EXCLUDED.passwordHash, isVerified=EXCLUDED.isVerified,
+           verificationCode=EXCLUDED.verificationCode, country=EXCLUDED.country,
+           paidGardens=EXCLUDED.paidGardens`,
+        [u.id, u.email, u.phone, u.name, u.passwordHash, u.isVerified, u.verificationCode, u.createdAt, u.currentSessionId, u.country || '', u.paidGardens]
       );
     }
     console.log('[Seed] 1 user inserted');
 
-    // 5. Payments
     const payments = [
       { id: 'TXN_EG_PX6B4PDFV', userId: 'u_0xosos8w3', userEmail: 'mazeneika2009@gmail.com', gardenId: 'g_h4r7t9w1q', currency: 'EGP', amount: 550, gateway: 'instapay', paymentMethod: 'InstaPay', screenshot: null, status: 'approved', timestamp: '2026-06-22 05:09:21' },
       { id: 'TXN_EG_CGIO7ICI2', userId: 'u_0xosos8w3', userEmail: 'mazeneika2009@gmail.com', gardenId: 'g_k7m3x9p2r', currency: 'EGP', amount: 500, gateway: 'instapay', paymentMethod: 'InstaPay', screenshot: null, status: 'approved', timestamp: '2026-06-22 05:23:02' },
@@ -219,20 +213,19 @@ async function run() {
     ];
 
     for (const p of payments) {
-      await pool.query(
+      await rawPool.query(
         `INSERT INTO payments (id, userId, userEmail, gardenId, currency, amount, gateway, paymentMethod, screenshot, status, timestamp)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-         ON DUPLICATE KEY UPDATE
-           userId=VALUES(userId), userEmail=VALUES(userEmail), gardenId=VALUES(gardenId),
-           currency=VALUES(currency), amount=VALUES(amount), gateway=VALUES(gateway),
-           paymentMethod=VALUES(paymentMethod), screenshot=VALUES(screenshot),
-           status=VALUES(status)`,
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+         ON CONFLICT (id) DO UPDATE SET
+           userId=EXCLUDED.userId, userEmail=EXCLUDED.userEmail, gardenId=EXCLUDED.gardenId,
+           currency=EXCLUDED.currency, amount=EXCLUDED.amount, gateway=EXCLUDED.gateway,
+           paymentMethod=EXCLUDED.paymentMethod, screenshot=EXCLUDED.screenshot,
+           status=EXCLUDED.status`,
         [p.id, p.userId, p.userEmail, p.gardenId, p.currency, p.amount, p.gateway, p.paymentMethod, p.screenshot, p.status, p.timestamp]
       );
     }
     console.log('[Seed] 3 payments inserted');
 
-    // 6. Quiz questions (a few per garden)
     const quizQuestions = [
       { id: 'qq_h_1', seedId: 's_h_1', questionEn: 'What does HTML stand for?', questionAr: 'ماذا تعني HTML؟', questionTr: 'HTML ne anlama gelir?', optionsEn: JSON.stringify(['HyperText Markup Language', 'HighText Machine Language', 'HyperTool Markup Language', 'HomeTool Markup Language']), optionsAr: JSON.stringify(['لغة ترميز النص التشعبي', 'لغة آلة النص العالي', 'لغة ترميز الأدوات', 'لغة ترميز المنزل']), optionsTr: JSON.stringify(['Köprü Metni İşaretleme Dili', 'Yüksek Metin Makine Dili', 'Araç İşaretleme Dili', 'Ev Aracı İşaretleme Dili']), correctIndex: 0 },
       { id: 'qq_h_2', seedId: 's_h_1', questionEn: 'Which tag is used for the largest heading?', questionAr: 'ما هي العلامة المستخدمة لأكبر عنوان؟', questionTr: 'En büyük başlık için hangi etiket kullanılır?', optionsEn: JSON.stringify(['<h6>', '<heading>', '<h1>', '<head>']), optionsAr: JSON.stringify(['<h6>', '<heading>', '<h1>', '<head>']), optionsTr: JSON.stringify(['<h6>', '<heading>', '<h1>', '<head>']), correctIndex: 2 },
@@ -255,20 +248,20 @@ async function run() {
     ];
 
     for (const q of quizQuestions) {
-      await pool.query(
+      await rawPool.query(
         `INSERT INTO quiz_questions (id, seedId, questionEn, questionAr, questionTr, optionsEn, optionsAr, optionsTr, correctIndex, timestamp)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, UNIX_TIMESTAMP())
-         ON DUPLICATE KEY UPDATE
-           seedId=VALUES(seedId), questionEn=VALUES(questionEn), questionAr=VALUES(questionAr), questionTr=VALUES(questionTr),
-           optionsEn=VALUES(optionsEn), optionsAr=VALUES(optionsAr), optionsTr=VALUES(optionsTr),
-           correctIndex=VALUES(correctIndex)`,
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, EXTRACT(EPOCH FROM NOW())::INTEGER)
+         ON CONFLICT (id) DO UPDATE SET
+           seedId=EXCLUDED.seedId, questionEn=EXCLUDED.questionEn, questionAr=EXCLUDED.questionAr, questionTr=EXCLUDED.questionTr,
+           optionsEn=EXCLUDED.optionsEn, optionsAr=EXCLUDED.optionsAr, optionsTr=EXCLUDED.optionsTr,
+           correctIndex=EXCLUDED.correctIndex`,
         [q.id, q.seedId, q.questionEn, q.questionAr, q.questionTr, q.optionsEn, q.optionsAr, q.optionsTr, q.correctIndex]
       );
     }
     console.log('[Seed] 18 quiz questions inserted');
 
     console.log('[Seed] All data restored successfully!');
-    await pool.end();
+    await rawPool.end();
   } catch (e) {
     console.error('[Seed] Error:', e.message);
   }

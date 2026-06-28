@@ -1,23 +1,6 @@
 {
   "users": [
     {
-      "id": "u_0xosos8w3",
-      "email": "mazeneika2009@gmail.com",
-      "phone": "000",
-      "name": "طالب",
-      "current_session_id": "session_s7jktcmmj",
-      "country": "Egypt",
-      "createdAt": "2026-06-22T00:34:32.000Z",
-      "passwordHash": "M",
-      "isVerified": 0,
-      "verificationCode": "291847",
-      "paidGardens": [
-        "g_h4r7t9w1q",
-        "g_k7m3x9p2r",
-        "g_b5n8d2c1f"
-      ]
-    },
-    {
       "id": "u_pffcedu53",
       "email": "explore-test-123@example.com",
       "phone": "+201234567890",
@@ -237,6 +220,23 @@
       "isVerified": 0,
       "verificationCode": "801910",
       "paidGardens": []
+    },
+    {
+      "id": "u_0xosos8w3",
+      "email": "mazeneika2009@gmail.com",
+      "phone": "000",
+      "name": "طالب",
+      "current_session_id": "session_h7jud6zpq",
+      "country": "Egypt",
+      "createdAt": "2026-06-22T00:34:32.000Z",
+      "passwordHash": "M",
+      "isVerified": 1,
+      "verificationCode": "",
+      "paidGardens": [
+        "g_h4r7t9w1q",
+        "g_k7m3x9p2r",
+        "g_b5n8d2c1f"
+      ]
     },
     {
       "id": "u_xzleizfxh",
@@ -1923,6 +1923,15 @@
       "message": "sass",
       "status": "unread",
       "createdAt": "2026-06-28 09:45:44"
+    },
+    {
+      "id": "c_4712fry2t",
+      "name": "تلنتلانلانت",
+      "email": "maze@gmail.com",
+      "subject": "زةمزةمكةم",
+      "message": "ىلانهىنىنىا",
+      "status": "unread",
+      "createdAt": "2026-06-28 20:15:05"
     }
   ]
 }

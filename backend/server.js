@@ -8,7 +8,7 @@ import { pool, readDB, writeDB, initializeDB } from './server/db.js';
 import nodemailer from 'nodemailer';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import dns from 'dns';
+import { promises as dns } from 'dns';
 
 async function smtpConnectOpts() {
   const rawHost = process.env.SMTP_HOST;
